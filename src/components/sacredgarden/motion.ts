@@ -165,7 +165,8 @@ function setupHugArtboards(root: HTMLElement) {
   const fit = () => {
     for (const ab of boards) {
       let bottom = 0;
-      ab.querySelectorAll<HTMLElement>(":scope > .tn-elem").forEach((el) => {
+      // Les éléments animés (pétales qui tombent) débordent librement : ils ne comptent pas.
+      ab.querySelectorAll<HTMLElement>(":scope > .tn-elem:not([data-animate-sbs-event])").forEach((el) => {
         bottom = Math.max(bottom, el.offsetTop + el.offsetHeight);
       });
       if (bottom > 0) {
