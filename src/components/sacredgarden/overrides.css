@@ -1,0 +1,53 @@
+/*
+ * Values Tilda's runtime (tilda-zero) computes in the browser on the source page.
+ * The map embed uses axis "center" with % sizes inside a 343px artboard:
+ * top = (343 - 343) / 2 + 1px, left = (100% - 100%) / 2.
+ */
+#rec2487446163 .tn-elem[data-elem-id="1710614957366"] {
+  top: 1px;
+  left: 0;
+}
+
+/* Set by the Tilda runtime on the records wrapper: clips elements that spill past the viewport. */
+#allrecords {
+  overflow: hidden;
+}
+
+/* Formulaire « message secret » */
+.sg-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+#rec2487446233 textarea.sg-secret {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  resize: vertical;
+  font-size: 18px;
+  line-height: 1.45;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+#rec2487446233 .sg-count {
+  margin-top: 6px;
+  text-align: right;
+  font-size: 13px;
+  color: #9b9b9b;
+}
+
+/* Vidéo de Nouha : le haut se fond dans le fond pour garder le texte lisible */
+#rec2487446253 .tn-elem[data-elem-id="1772823499423"] video {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.35) 22%, #000 48%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.35) 22%, #000 48%);
+}
+
+/* Sans le bloc « Cadeaux », le dress code est recentré dans sa section */
+#rec2487446183 .tn-elem[data-elem-id="1778524751695000002"],
+#rec2487446183 .tn-elem[data-elem-id="1778524751695000001"] {
+  margin-top: 99px;
+}
