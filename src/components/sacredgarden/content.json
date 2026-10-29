@@ -195,7 +195,7 @@
       "data-animate-delay": "0.2",
       "data-animate-mobile": "y"
      },
-     "html": "<div class=\"tn-atom\" field=\"tn_text_1780748008617000005\">Chères amies <br/>Rejoignez-nous pour une soirée d'amour, de rires et de souvenirs inoubliables pour célébrer Nouha.</div>"
+     "html": "<div class=\"tn-atom\" field=\"tn_text_1780748008617000005\">Chères amies <br/>Rejoignez-nous pour une soirée d'amour, de rires et de souvenirs inoubliables pour célébrer l'anniversaire de Nouha.</div>"
     },
     {
      "id": "1782235970224000001",
@@ -318,20 +318,6 @@
       "data-animate-mobile": "y"
      },
      "html": "<div class=\"tn-atom\"> <img alt=\"\" class=\"tn-atom__img t-img\" imgfield=\"tn_img_1780148246706000001\" src=\"/sites/thesacredgarden/images/3232-3638-acomm-decor.png\"/> </div>"
-    },
-    {
-     "id": "1782312310182000001",
-     "type": "image",
-     "className": "t396__elem tn-elem tn-elem__24874461531782312310182000001 t-animate",
-     "attrs": {
-      "data-elem-id": "1782312310182000001",
-      "data-elem-type": "image",
-      "data-animate-style": "zoomin",
-      "data-animate-duration": "1",
-      "data-animate-scale": "0.9",
-      "data-animate-mobile": "y"
-     },
-     "html": "<div class=\"tn-atom\"> <img alt=\"\" class=\"tn-atom__img t-img\" imgfield=\"tn_img_1782312310182000001\" src=\"/sites/thesacredgarden/images/3637-3939-ChatGPT_Image_May_25.png\"/> </div>"
     },
     {
      "id": "1782460410648000001",
