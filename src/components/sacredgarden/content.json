@@ -46,7 +46,7 @@
       "data-elem-type": "html",
       "data-animate-mobile": "y"
      },
-     "html": "<div class=\"tn-atom tn-atom__html\"> <video autoplay=\"\" loop=\"\" muted=\"\" playsinline=\"\" style=\"width: 100%; height: auto; object-fit: cover; display: block;\"> <source src=\"/sites/thesacredgarden/media/Swans2_1_qwzsod.mov\" type=\"video/mp4\"/>\nYour browser does not support the video tag.\n</video> </div>"
+     "html": "<div class=\"tn-atom tn-atom__html\"> <video class=\"sg-swans\" autoplay=\"\" loop=\"\" muted=\"\" playsinline=\"\" style=\"width: 100%; height: auto; object-fit: cover; display: block;\"> <source src=\"/media/swans.mp4\" type=\"video/mp4\"/>\nYour browser does not support the video tag.\n</video> </div>"
     },
     {
      "id": "1763402091707",
@@ -768,7 +768,7 @@
       "data-elem-id": "1772823499423",
       "data-elem-type": "image"
      },
-     "html": "<div class=\"tn-atom\"><video class=\"tn-atom__img\" src=\"/media/nouha.mp4\" poster=\"/media/nouha-poster.webp\" autoplay muted loop playsinline preload=\"metadata\" aria-label=\"Nouha entourée de fleurs\" style=\"width:100%;aspect-ratio:450/675;object-fit:cover;object-position:50% 50%;display:block\"></video></div>"
+     "html": "<div class=\"tn-atom\"><video class=\"tn-atom__img\" src=\"/media/nouha.mp4\" poster=\"/media/nouha-poster.webp\" autoplay muted loop playsinline preload=\"auto\" aria-label=\"Nouha entourée de fleurs\" style=\"width:100%;aspect-ratio:450/675;object-fit:cover;object-position:50% 50%;display:block\"></video></div>"
     },
     {
      "id": "1778673930481",

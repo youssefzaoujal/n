@@ -42,9 +42,20 @@ export function Envelope({ envelope, video, music }: EnvelopeProps) {
     }).catch(() => {});
   };
 
+  /** Vidéos en boucle de la page (cygnes, vidéo de Nouha) : relancées depuis le début. */
+  const playLoops = (restart: boolean) => {
+    document.querySelectorAll<HTMLVideoElement>("#allrecords video[loop]").forEach((v) => {
+      v.muted = true;
+      v.loop = true;
+      if (restart) v.currentTime = 0;
+      v.play().catch(() => {});
+    });
+  };
+
   const start = () => {
     if (done.current) return;
     done.current = true;
+    playLoops(false);
     setOverlay("fading");
     setTimeout(() => setOverlay("gone"), 1400);
     setVideoState("in");
@@ -61,6 +72,8 @@ export function Envelope({ envelope, video, music }: EnvelopeProps) {
   const endSequence = () => {
     if (ended.current) return;
     ended.current = true;
+    // Les cygnes repartent du début dès que l'ouverture se termine, en boucle sans fin.
+    playLoops(true);
     setVideoState("out");
     setTimeout(() => setVideoState("gone"), 1400);
     setButtonVisible(true);

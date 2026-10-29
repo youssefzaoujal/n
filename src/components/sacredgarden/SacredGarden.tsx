@@ -19,7 +19,35 @@ export function SacredGarden() {
 
   useEffect(() => {
     if (!root.current) return;
-    return initMotion(root.current);
+    const stopMotion = initMotion(root.current);
+    // Vidéos en boucle (cygnes, Nouha) : toujours relancées quand elles sont visibles.
+    const loops = [...root.current.querySelectorAll<HTMLVideoElement>("video[loop]")];
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        const v = e.target as HTMLVideoElement;
+        if (e.isIntersecting && v.paused) {
+          v.muted = true;
+          v.play().catch(() => {});
+        }
+      }
+    });
+    loops.forEach((v) => {
+      v.muted = true;
+      v.loop = true;
+      io.observe(v);
+      v.addEventListener("pause", () => {
+        if (!document.hidden) v.play().catch(() => {});
+      });
+    });
+    const onVisible = () => {
+      if (!document.hidden) loops.forEach((v) => v.play().catch(() => {}));
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      stopMotion();
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, []);
 
   return (
