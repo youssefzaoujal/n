@@ -1931,3 +1931,18 @@ html.lenis body {
 #rec2487446153 .sg-venue figcaption {
   margin-top: 40px;
 }
+
+/* Photo de Dar Tanja : la hauteur vient de l'image elle-même (aucun recadrage possible,
+   y compris sur Safari iPhone) */
+#rec2487446153 .sg-venue-frame {
+  aspect-ratio: auto;
+  height: auto;
+}
+
+#rec2487446153 .sg-venue-frame img {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100%;
+  object-fit: fill;
+}
