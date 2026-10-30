@@ -185,23 +185,13 @@ export function WordsSection() {
               </textPath>
             </text>
           </svg>
-          <span className="sg-ws-orbit" aria-hidden="true">
-            <i />
-            <i />
-            <i />
-          </span>
           <span className="sg-ws-seal">
             <img src={SEAL} alt="" draggable={false} />
             <span className="sg-ws-shine" aria-hidden="true" />
           </span>
         </a>
 
-        <div {...reveal("fadeinup", 0.35)}>
-          <a className="sg-btn" href="#popup:myform">
-            Lui laisser un mot doux <span className="sg-heart">♡</span>
-          </a>
-          <p className="sg-s-soft">Parfois, les plus beaux cadeaux sont ceux qui viennent du cœur.</p>
-        </div>
+        <p {...reveal("fadeinup", 0.35, 1.6, "sg-s-soft")}>Parfois, les plus beaux cadeaux sont ceux qui viennent du cœur.</p>
       </div>
     </section>
   );

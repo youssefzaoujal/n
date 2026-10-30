@@ -5,7 +5,8 @@ Version personnalisée de l'invitation The Sacred Garden : même design et même
 dress code, cachet de cire, musique), avec les textes de Nouha, ta vidéo d'ouverture Y&N,
 un cachet Y&N et la vidéo de Nouha en bas de page.
 
-Le formulaire du cachet est devenu « Un message secret » : un message anonyme pour Nouha.
+Le cachet ouvre « Un mot doux » : un message anonyme pour Nouha, envoyé à Formspree
+(formulaire `xdeellab`) qui le transfère par e-mail.
 
 ## Tester
 
@@ -15,8 +16,7 @@ npm install
 npm run dev
 ```
 
-Puis ouvre http://localhost:3000. En local, les messages envoyés sont enregistrés dans
-`.data/messages.json`.
+Puis ouvre http://localhost:3000.
 
 ## Modifier les textes
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Lenis from "lenis";
 import { Fragment, useEffect, useRef } from "react";
 import contentJson from "./content.json";
 import { Countdown } from "./Countdown";
@@ -23,6 +24,32 @@ export function SacredGarden() {
   useEffect(() => {
     if (!root.current) return;
     const stopMotion = initMotion(root.current);
+
+    // Défilement fluide (souris / pavé tactile) ; le doigt garde le défilement natif du téléphone.
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const lenis = reduce
+      ? null
+      : new Lenis({
+          lerp: 0.085,
+          wheelMultiplier: 0.9,
+          smoothWheel: true,
+          prevent: (node: HTMLElement) => !!node.closest?.(".t-popup"),
+        });
+    let lenisRaf = 0;
+    const lenisLoop = (t: number) => {
+      lenis?.raf(t);
+      lenisRaf = requestAnimationFrame(lenisLoop);
+    };
+    if (lenis) lenisRaf = requestAnimationFrame(lenisLoop);
+    // Pas de défilement de la page derrière l'enveloppe ni derrière le formulaire.
+    const syncLock = () => {
+      const locked = document.body.classList.contains("t-body_popupshowed") || !!document.getElementById("weiOverlay");
+      if (locked) lenis?.stop();
+      else lenis?.start();
+    };
+    const lockObserver = new MutationObserver(syncLock);
+    lockObserver.observe(document.body, { attributes: true, attributeFilter: ["class"], childList: true, subtree: true });
+    syncLock();
     // Vidéos en boucle (cygnes, Nouha) : toujours relancées quand elles sont visibles.
     const loops = [...root.current.querySelectorAll<HTMLVideoElement>("video[loop]")];
     const io = new IntersectionObserver((entries) => {
@@ -48,6 +75,9 @@ export function SacredGarden() {
     document.addEventListener("visibilitychange", onVisible);
     return () => {
       stopMotion();
+      cancelAnimationFrame(lenisRaf);
+      lenis?.destroy();
+      lockObserver.disconnect();
       io.disconnect();
       document.removeEventListener("visibilitychange", onVisible);
     };

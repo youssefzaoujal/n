@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { confetti } from "@/lib/confetti";
+import { flowerShower, preloadFlowers } from "@/lib/flowers";
 import { OPENED_EVENT } from "./HeroTitle";
 
 /**
  * Effets « magie » posés par-dessus la page :
  * - poussière d'or qui flotte doucement,
  * - étincelles dorées à chaque toucher / clic,
- * - pluie de confettis dorés à l'ouverture de l'enveloppe,
+ * - pluie de fleurs (roses, pivoines, pétales) à l'ouverture de l'enveloppe,
  * - fil d'or en haut de l'écran qui suit le défilement.
  */
 export function MagicFx() {
@@ -26,12 +26,13 @@ export function MagicFx() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Confettis à l'ouverture
+    // Pluie de fleurs à l'ouverture
+    preloadFlowers();
     const onOpened = () => {
       if (reduce) return;
-      setTimeout(() => confetti({ y: 0.32, count: 150, spread: 0.9 }), 200);
-      setTimeout(() => confetti({ x: 0.15, y: 0.55, count: 70, spread: 0.7 }), 700);
-      setTimeout(() => confetti({ x: 0.85, y: 0.55, count: 70, spread: 0.7 }), 1000);
+      setTimeout(() => flowerShower({ y: 0.34, count: 38, spread: 1 }), 150);
+      setTimeout(() => flowerShower({ x: 0.15, y: 0.48, count: 16, spread: 0.75 }), 650);
+      setTimeout(() => flowerShower({ x: 0.85, y: 0.48, count: 16, spread: 0.75 }), 950);
     };
     window.addEventListener(OPENED_EVENT, onOpened);
 

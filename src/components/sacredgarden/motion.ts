@@ -7,7 +7,8 @@
  * Returns a cleanup function.
  */
 
-const EASE = "cubic-bezier(.19,1,.22,1)";
+/** Courbe très douce (décélération longue) pour toutes les apparitions. */
+const EASE = "cubic-bezier(.22,1,.36,1)";
 
 interface ScrollStep {
   mx: number;
@@ -52,14 +53,18 @@ function setupAppear(root: HTMLElement) {
   const num = (v: string | undefined) => (v === undefined || v === "" ? null : Number(v));
   for (const el of els) {
     const style = el.dataset.animateStyle ?? "fadein";
-    const duration = num(el.dataset.animateDuration) ?? 1;
+    // Apparitions plus longues et plus douces que l'original, avec un léger flou qui se dissipe.
+    const duration = Math.max(1.4, num(el.dataset.animateDuration) ?? 1.4);
     const delay = num(el.dataset.animateDelay) ?? 0;
-    el.style.transitionProperty = "opacity, transform";
+    el.style.transitionProperty = "opacity, transform, filter";
     el.style.transitionTimingFunction = EASE;
-    el.style.transitionDuration = `${duration}s`;
+    el.style.transitionDuration = `${duration}s, ${duration * 1.1}s, ${duration}s`;
     el.style.transitionDelay = `${delay}s`;
+    el.style.willChange = "opacity, transform, filter";
     el.style.opacity = "0";
-    const t = initialTransform(style, num(el.dataset.animateDistance), num(el.dataset.animateScale));
+    el.style.filter = "blur(8px)";
+    const distance = num(el.dataset.animateDistance);
+    const t = initialTransform(style, distance === null ? 40 : Math.min(distance, 50), num(el.dataset.animateScale));
     if (t) el.style.transform = t;
   }
   const io = new IntersectionObserver(
@@ -70,10 +75,13 @@ function setupAppear(root: HTMLElement) {
         el.classList.add("t-animate_started");
         el.style.opacity = "1";
         el.style.transform = "none";
+        el.style.filter = "none";
+        // libère la mémoire graphique une fois l'animation finie
+        el.addEventListener("transitionend", () => (el.style.willChange = "auto"), { once: true });
         io.unobserve(el);
       }
     },
-    { threshold: 0 },
+    { threshold: 0.01, rootMargin: "0px 0px -6% 0px" },
   );
   els.forEach((el) => io.observe(el));
   return () => io.disconnect();

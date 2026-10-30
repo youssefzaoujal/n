@@ -5,6 +5,8 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from "react"
 
 const POPUP_HOOK = "#popup:myform";
 const SEAL = "/sites/thesacredgarden/images/seal-yn.png";
+/** Formulaire Formspree de Youssef (les réponses arrivent par e-mail). */
+const FORMSPREE = "https://formspree.io/f/xdeellab";
 const ORNAMENT = "/sites/thesacredgarden/images/3232-3638-acomm-decor.png";
 
 /**
@@ -67,19 +69,26 @@ export function RsvpPopup({ recordId }: { recordId: string }) {
     setSending(true);
     const started = Date.now();
     try {
-      const res = await fetch("/api/messages", {
+      // Envoi à Formspree : chaque mot arrive par e-mail, sans nom ni adresse de l'invitée.
+      const res = await fetch(FORMSPREE, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, website }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          message: text,
+          _subject: "💌 Un mot doux pour Nouha",
+          _gotcha: website,
+        }),
       });
-      const data = (await res.json()) as { ok?: boolean; error?: string };
-      if (!res.ok || !data.ok) throw new Error(data.error || "Une erreur est survenue, réessaie.");
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; errors?: { message?: string }[] };
+      if (!res.ok || data.ok === false) {
+        throw new Error(data.errors?.[0]?.message || "L'envoi n'a pas abouti. Réessayez dans un instant.");
+      }
       // Laisse le temps à l'animation de pliage de la lettre.
       await new Promise((r) => setTimeout(r, Math.max(0, 1100 - (Date.now() - started))));
       setText("");
       setSuccess(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Une erreur est survenue, réessaie.");
+      setError(err instanceof Error ? err.message : "L'envoi n'a pas abouti. Réessayez dans un instant.");
     } finally {
       setSending(false);
     }
