@@ -181,7 +181,7 @@
       "data-animate-duration": "1",
       "data-animate-mobile": "y"
      },
-     "html": "<div class=\"tn-atom\" field=\"tn_text_1780748008617000003\">Une étoile <br/>Une âme lumineuse <br/>Une soirée rien que pour elle</div>"
+     "html": "<div class=\"tn-atom\" field=\"tn_text_1780748008617000003\">Une lumière.<br/>Une présence précieuse.<br/>Une nuit entièrement<br/>dédiée à elle.</div>"
     },
     {
      "id": "1780748008617000005",
@@ -195,7 +195,7 @@
       "data-animate-delay": "0.2",
       "data-animate-mobile": "y"
      },
-     "html": "<div class=\"tn-atom\" field=\"tn_text_1780748008617000005\">Chères amies <br/>Rejoignez-nous pour une soirée d'amour, de rires et de souvenirs inoubliables pour célébrer l'anniversaire de Nouha.</div>"
+     "html": "<div class=\"tn-atom\" field=\"tn_text_1780748008617000005\">Certaines âmes rendent la vie plus belle, simplement en en faisant partie.</div>"
     },
     {
      "id": "1782235970224000001",
@@ -221,7 +221,7 @@
       "data-elem-id": "1782235970225000002",
       "data-elem-type": "text"
      },
-     "html": "<div class=\"tn-atom\" field=\"tn_text_1782235970225000002\">Défiler</div>"
+     "html": "<div class=\"tn-atom\" field=\"tn_text_1782235970225000002\">Défiler pour découvrir<br/>la magie de cette soirée</div>"
     },
     {
      "id": "1782312134224",
@@ -232,6 +232,16 @@
       "data-elem-type": "image"
      },
      "html": "<div class=\"tn-atom\"> <img alt=\"\" class=\"tn-atom__img t-img\" imgfield=\"tn_img_1782312134224\" loading=\"lazy\" src=\"/sites/thesacredgarden/images/3438-6238-noroot.png\"/> </div>"
+    },
+    {
+     "id": "sg-hero",
+     "type": "html",
+     "className": "t396__elem tn-elem sg-hero-elem",
+     "attrs": {
+      "data-elem-id": "sg-hero",
+      "data-elem-type": "html"
+     },
+     "html": ""
     }
    ]
   },
@@ -278,7 +288,7 @@
       "data-elem-id": "1771277026942000001",
       "data-elem-type": "text"
      },
-     "html": "<div class=\"tn-atom\" field=\"tn_text_1771277026942000001\">La fête commence dans</div>"
+     "html": "<div class=\"tn-atom\" field=\"tn_text_1771277026942000001\">Le compte à rebours est lancé</div>"
     }
    ]
   },
@@ -318,6 +328,20 @@
       "data-animate-mobile": "y"
      },
      "html": "<div class=\"tn-atom\"> <img alt=\"\" class=\"tn-atom__img t-img\" imgfield=\"tn_img_1780148246706000001\" src=\"/sites/thesacredgarden/images/3232-3638-acomm-decor.png\"/> </div>"
+    },
+    {
+     "id": "1782312310182000001",
+     "type": "image",
+     "className": "t396__elem tn-elem tn-elem__24874461531782312310182000001 t-animate",
+     "attrs": {
+      "data-elem-id": "1782312310182000001",
+      "data-elem-type": "image",
+      "data-animate-style": "zoomin",
+      "data-animate-duration": "1",
+      "data-animate-scale": "0.9",
+      "data-animate-mobile": "y"
+     },
+     "html": "<div class=\"tn-atom\"><figure class=\"sg-venue\"><p class=\"sg-venue-kicker\">Un lieu · une nuit · mille souvenirs</p><div class=\"sg-venue-frame\"><img class=\"tn-atom__img\" src=\"/images/dar-tanja.webp\" alt=\"Dar Tanja, la piscine et la maison illuminées le soir\" loading=\"lazy\"/></div><figcaption><span class=\"sg-venue-name\">Dar Tanja · Tanger</span><span class=\"sg-venue-line\">Un endroit plein de charme, pour une soirée pleine d'amour.</span><a class=\"sg-venue-btn\" href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0xd0c78840e32eea5:0x7da541e90ea99ca1\" target=\"_blank\" rel=\"noreferrer\">Voir l'itinéraire</a></figcaption></figure></div>"
     },
     {
      "id": "1782460410648000001",
@@ -421,7 +445,7 @@
       "data-animate-distance": "40",
       "data-animate-mobile": "y"
      },
-     "html": "<div class=\"tn-atom\" field=\"tn_text_1772804808869\">xxxx</div>"
+     "html": "<div class=\"tn-atom\" field=\"tn_text_1772804808869\">Dar Tanja</div>"
     },
     {
      "id": "1772813480591000001",
@@ -435,7 +459,7 @@
       "data-animate-distance": "40",
       "data-animate-mobile": "y"
      },
-     "html": "<div class=\"tn-atom\" field=\"tn_text_1772813480591000001\">Adresse : xxxx</div>"
+     "html": "<div class=\"tn-atom\" field=\"tn_text_1772813480591000001\"><a class=\"sg-addr\" href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0xd0c78840e32eea5:0x7da541e90ea99ca1\" target=\"_blank\" rel=\"noreferrer\">Villa Charrat, Lots Volcaltom,<br/>Boubana — Tanger</a></div>"
     },
     {
      "id": "1771277026942000001",
@@ -486,7 +510,7 @@
       "data-elem-id": "1710614957366",
       "data-elem-type": "html"
      },
-     "html": "<div class=\"tn-atom tn-atom__html\"> <div style=\"display: flex; justify-content: center; align-items: center; height: 100%;\"> <iframe allowfullscreen=\"\" height=\"335\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\" src=\"https://www.google.com/maps?q=Maroc&amp;z=5&amp;output=embed\" title=\"Carte du lieu\" style=\"border:0; border-radius:15px;\" width=\"335\"></iframe> </div> </div>"
+     "html": "<div class=\"tn-atom tn-atom__html\"> <div style=\"display: flex; justify-content: center; align-items: center; height: 100%;\"> <iframe allowfullscreen=\"\" height=\"335\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\" src=\"https://www.google.com/maps?q=Dar+Tanja,+Tanger&amp;z=15&amp;output=embed\" title=\"Carte du lieu\" style=\"border:0; border-radius:15px;\" width=\"335\"></iframe> </div> </div>"
     },
     {
      "id": "1782460739526000001",
@@ -567,7 +591,7 @@
       "data-animate-distance": "40",
       "data-animate-mobile": "y"
      },
-     "html": "<div class=\"tn-atom\" field=\"tn_text_1778524751695000001\">xxxx</div>"
+     "html": "<div class=\"tn-atom\" field=\"tn_text_1778524751695000001\"><span class=\"sg-dress-lead\">Libre d'être vous, libre de briller.</span><br/>Portez ce qui vous fait vous sentir belles. Le plus important, c'est de partager cette nuit ensemble.</div>"
     },
     {
      "id": "1778524751695000002",
@@ -577,7 +601,7 @@
       "data-elem-id": "1778524751695000002",
       "data-elem-type": "text"
      },
-     "html": "<div class=\"tn-atom\" field=\"tn_text_1778524751695000002\">Dress Code</div>"
+     "html": "<div class=\"tn-atom\" field=\"tn_text_1778524751695000002\">Dress Code <span class=\"sg-heart\">♡</span></div>"
     },
     {
      "id": "1780166531595",
@@ -777,7 +801,7 @@
       "data-animate-duration": "1",
       "data-animate-mobile": "y"
      },
-     "html": "<div class=\"tn-atom\" field=\"tn_text_1763405219328\">On vous attend !</div>"
+     "html": "<div class=\"tn-atom\" field=\"tn_text_1763405219328\">On vous attend <span class=\"sg-heart\">♡</span></div>"
     },
     {
      "id": "1780167388618000002",
@@ -807,7 +831,7 @@
       "data-animate-distance": "40",
       "data-animate-mobile": "y"
      },
-     "html": "<div class=\"tn-atom\" field=\"tn_text_1772813849329000001\">Avec amour</div>"
+     "html": "<div class=\"tn-atom\" field=\"tn_text_1772813849329000001\">Avec tout notre amour. <span class=\"sg-heart\">♡</span></div>"
     }
    ]
   }

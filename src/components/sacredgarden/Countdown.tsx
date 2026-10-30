@@ -90,6 +90,8 @@ export function Countdown() {
 
   const r = revealed ? " revealed" : "";
   return (
+    <div className={`sg-cd${r}`}>
+    <p className="sg-cd-sub">Encore quelques instants avant une nuit que l&apos;on n&apos;oubliera pas…</p>
     <div id="countdownContainer" ref={ref}>
       {BLOCKS.map(({ block, unit, label }, i) => (
         <div key={block} style={{ display: "contents" }}>
@@ -102,6 +104,8 @@ export function Countdown() {
           </div>
         </div>
       ))}
+    </div>
+    <p className="sg-cd-after">La magie approche…</p>
     </div>
   );
 }

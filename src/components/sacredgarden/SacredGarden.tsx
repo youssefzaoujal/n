@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import contentJson from "./content.json";
 import { Countdown } from "./Countdown";
 import { Envelope } from "./Envelope";
+import { HeroTitle } from "./HeroTitle";
+import { MagicFx } from "./MagicFx";
 import { initMotion } from "./motion";
 import { RsvpPopup } from "./RsvpPopup";
+import { LetterSection, LoveSection, TimeSection, WordsSection } from "./Sections";
 import type { SiteContent } from "./types";
 import { ZeroSection } from "./ZeroSection";
 
@@ -58,6 +61,7 @@ export function SacredGarden() {
       data-tilda-page-alias="thesacredgarden"
       data-tilda-lazy="yes"
     >
+      <MagicFx />
       {content.records.map((record) => {
         if (record.name === "envelope") {
           return (
@@ -67,12 +71,24 @@ export function SacredGarden() {
           );
         }
         if (record.name === "rsvpPopup") return <RsvpPopup key={record.id} recordId={record.id} />;
+        // La section « message secret » d'origine est remplacée par « Des mots rien que pour elle ».
+        if (record.name === "rsvp") return <WordsSection key={record.id} />;
         return (
+          <Fragment key={record.id}>
+          {record.name === "closing" && <LoveSection />}
           <ZeroSection
-            key={record.id}
             record={record}
-            slots={record.name === "countdown" ? { [COUNTDOWN_ELEMENT]: <Countdown /> } : undefined}
+            slots={
+              record.name === "countdown"
+                ? { [COUNTDOWN_ELEMENT]: <Countdown /> }
+                : record.name === "hero"
+                  ? { "sg-hero": <HeroTitle /> }
+                  : undefined
+            }
           />
+          {record.name === "hero" && <LetterSection />}
+          {record.name === "map" && <TimeSection />}
+          </Fragment>
         );
       })}
     </div>

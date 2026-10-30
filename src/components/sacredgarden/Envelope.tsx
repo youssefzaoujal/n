@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useRef, useState } from "react";
+import { OPENED_EVENT } from "./HeroTitle";
 
 interface EnvelopeProps {
   envelope: string;
@@ -72,6 +73,7 @@ export function Envelope({ envelope, video, music }: EnvelopeProps) {
   const endSequence = () => {
     if (ended.current) return;
     ended.current = true;
+    window.dispatchEvent(new Event(OPENED_EVENT));
     // Les cygnes repartent du début dès que l'ouverture se termine, en boucle sans fin.
     playLoops(true);
     setVideoState("out");
