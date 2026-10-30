@@ -30,9 +30,8 @@ export function MagicFx() {
     preloadFlowers();
     const onOpened = () => {
       if (reduce) return;
-      setTimeout(() => flowerShower({ y: 0.34, count: 38, spread: 1 }), 150);
-      setTimeout(() => flowerShower({ x: 0.15, y: 0.48, count: 16, spread: 0.75 }), 650);
-      setTimeout(() => flowerShower({ x: 0.85, y: 0.48, count: 16, spread: 0.75 }), 950);
+      // Une seule gerbe légère : quelques fleurs et pétales, pour rester élégant.
+      setTimeout(() => flowerShower({ y: 0.36, count: 14, spread: 0.8 }), 200);
     };
     window.addEventListener(OPENED_EVENT, onOpened);
 
