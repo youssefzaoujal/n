@@ -1,14 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { flowerShower, preloadFlowers } from "@/lib/flowers";
-import { OPENED_EVENT } from "./HeroTitle";
 
 /**
  * Effets « magie » posés par-dessus la page :
  * - poussière d'or qui flotte doucement,
  * - étincelles dorées à chaque toucher / clic,
- * - pluie de fleurs (roses, pivoines, pétales) à l'ouverture de l'enveloppe,
  * - fil d'or en haut de l'écran qui suit le défilement.
  */
 export function MagicFx() {
@@ -25,15 +22,6 @@ export function MagicFx() {
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-
-    // Pluie de fleurs à l'ouverture
-    preloadFlowers();
-    const onOpened = () => {
-      if (reduce) return;
-      // Une seule gerbe légère : quelques fleurs et pétales, pour rester élégant.
-      setTimeout(() => flowerShower({ y: 0.36, count: 14, spread: 0.8 }), 200);
-    };
-    window.addEventListener(OPENED_EVENT, onOpened);
 
     // Étincelles au toucher
     const onTap = (e: PointerEvent) => {
@@ -112,7 +100,6 @@ export function MagicFx() {
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener(OPENED_EVENT, onOpened);
       window.removeEventListener("pointerdown", onTap);
       if (onResize) window.removeEventListener("resize", onResize);
     };

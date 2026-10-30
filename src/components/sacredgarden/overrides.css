@@ -839,11 +839,11 @@
 #rec2487446093 .t396__artboard,
 #rec2487446093 .t396__filter,
 #rec2487446093 .t396__carrier {
-  height: 330px !important;
+  height: 280px !important;
 }
 
 #rec2487446093 .sg-cd {
-  padding-top: 84px;
+  padding-top: 66px;
   text-align: center;
 }
 
@@ -891,13 +891,12 @@
   color: #a67d2b;
 }
 
-#rec2487446153 .sg-venue::before,
-#rec2487446153 .sg-venue::after {
-  top: 37px;
+#rec2487446153 .sg-venue::before {
+  top: -11px;
 }
 
 #rec2487446153 .sg-venue::after {
-  top: 28px;
+  top: -20px;
 }
 
 #rec2487446153 .sg-venue figcaption {
@@ -1883,5 +1882,13 @@ html.lenis body {
 #rec2487446153 .t396__artboard,
 #rec2487446153 .t396__carrier,
 #rec2487446153 .t396__filter {
-  height: 760px;
+  height: 639px;
+}
+
+/* « Avec tout notre amour » dans la même calligraphie que « On vous attend » */
+#rec2487446253 .tn-elem[data-elem-id="1772813849329000001"] .tn-atom {
+  font-family: "NewFonts", Arial, sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 36px !important;
+  line-height: 1.3 !important;
 }

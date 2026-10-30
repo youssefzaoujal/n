@@ -341,7 +341,7 @@
       "data-animate-scale": "0.9",
       "data-animate-mobile": "y"
      },
-     "html": "<div class=\"tn-atom\"><figure class=\"sg-venue\"><p class=\"sg-venue-kicker\">Un lieu · une nuit · mille souvenirs</p><div class=\"sg-venue-frame\"><img class=\"tn-atom__img\" src=\"/images/dar-tanja.webp\" alt=\"Dar Tanja, la piscine et la maison illuminées le soir\" loading=\"lazy\"/></div><figcaption><span class=\"sg-venue-name\">Dar Tanja · Tanger</span><span class=\"sg-venue-line\">Un endroit plein de charme, pour une soirée pleine d'amour.</span><a class=\"sg-venue-btn\" href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0xd0c78840e32eea5:0x7da541e90ea99ca1\" target=\"_blank\" rel=\"noreferrer\">Voir l'itinéraire</a></figcaption></figure></div>"
+     "html": "<div class=\"tn-atom\"><figure class=\"sg-venue\"><div class=\"sg-venue-frame\"><img class=\"tn-atom__img\" src=\"/images/dar-tanja.webp\" alt=\"Dar Tanja, la piscine et la maison illuminées le soir\" loading=\"lazy\"/></div><figcaption><a class=\"sg-venue-btn\" href=\"https://www.google.com/maps/place//data=!4m2!3m1!1s0xd0c78840e32eea5:0x7da541e90ea99ca1\" target=\"_blank\" rel=\"noreferrer\">Voir l'itinéraire</a></figcaption></figure></div>"
     },
     {
      "id": "1782460410648000001",

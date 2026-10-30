@@ -58,7 +58,7 @@ export function LetterSection() {
             dans nos cœurs.
           </p>
           <p>Parce que certaines personnes méritent qu&apos;on leur rappelle à quel point elles sont aimées.</p>
-          <p className="sg-paper-end">Et Nouha en fait partie. <span className="sg-heart">♡</span></p>
+          <p className="sg-paper-end">Et Nouha en fait partie <span className="sg-heart">♡</span></p>
         </div>
       </div>
     </section>
@@ -123,22 +123,20 @@ export function TimeSection() {
 
         {known ? (
           <p {...reveal("fadeinup", 0.2, 1.6, "sg-s-text")}>
-            La magie commencera à {invitation.time}. On vous attend <span className="sg-heart">♡</span>
+            L&apos;anniversaire commencera à {invitation.time}. On vous attend <span className="sg-heart">♡</span>
           </p>
         ) : (
           <div {...reveal("fadeinup", 0.2)}>
-            <p className="sg-s-lead">Les plus belles soirées méritent un peu de mystère…</p>
             <p className="sg-s-text">L&apos;heure exacte de la célébration n&apos;est pas encore fixée.</p>
             <p className="sg-s-text">
-              Revenez sur ce site le <b>8 novembre</b>, trois jours avant l&apos;anniversaire de Nouha, pour découvrir
-              l&apos;heure à laquelle la magie commencera. ✨
+              Revenez sur ce site le <b>8 novembre</b> pour découvrir l&apos;heure à laquelle l&apos;anniversaire
+              commencera. ✨
             </p>
             {left !== null && left > 0 && (
               <p className="sg-time-badge">
                 Révélation dans {days} {days === 1 ? "jour" : "jours"} et {hours} h
               </p>
             )}
-            <p className="sg-s-soft">Encore un peu de patience… la plus belle des soirées se prépare. <span className="sg-heart">♡</span></p>
           </div>
         )}
       </div>
@@ -205,10 +203,6 @@ export function LoveSection() {
       <div className="sg-s-inner">
         <div {...reveal("fadeinup")}>
           <img className="sg-s-ornament top" src={ORNAMENT} alt="" aria-hidden="true" />
-          <p className="sg-s-lead">
-            Pour les rires qui résonnent, les regards complices, les souvenirs qui se créent et tout l&apos;amour qui nous
-            rassemble.
-          </p>
         </div>
         <div {...reveal("fadeinup", 0.15)}>
           <p className="sg-love-big">Une nuit pour célébrer Nouha.</p>
