@@ -1878,3 +1878,10 @@ html.lenis body {
   filter: drop-shadow(0 6px 8px rgba(120, 70, 50, 0.22));
   user-select: none;
 }
+
+/* Hauteur de la section « Le lieu » avec la photo, même si le script n'a pas encore tourné */
+#rec2487446153 .t396__artboard,
+#rec2487446153 .t396__carrier,
+#rec2487446153 .t396__filter {
+  height: 760px;
+}
