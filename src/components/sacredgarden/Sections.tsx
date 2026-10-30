@@ -135,7 +135,7 @@ export function WordsSection() {
         <div {...reveal("fadeinup")}>
           <p className="sg-s-kicker">Un cadeau qui ne s&apos;oublie pas</p>
           <h2 className="sg-s-title" id="sg-words-title">
-            Des mots rien que pour elle 💌
+            Des mots rien que pour elle
           </h2>
           <img className="sg-s-ornament" src={ORNAMENT} alt="" aria-hidden="true" />
         </div>

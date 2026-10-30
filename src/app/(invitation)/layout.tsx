@@ -7,7 +7,7 @@ const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   : "http://localhost:3000";
 
-const description = `${invitation.dateLabel} — une soirée pour célébrer ${invitation.name}. Ouvre ton invitation 💌`;
+const description = `${invitation.dateLabel} · Dar Tanja, Tanger — une soirée pour célébrer l'anniversaire de ${invitation.name}. Ouvrez votre invitation 💌`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description,
   robots: { index: false, follow: false },
   openGraph: {
-    title: `Tu es invitée à l'anniversaire de ${invitation.name}`,
+    title: `Vous êtes invitées à l'anniversaire de ${invitation.name} ✨`,
     description,
     type: "website",
     locale: "fr_FR",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", images: ["/images/og.jpg"] },
   formatDetection: { telephone: false },
-  icons: { icon: "/icon.svg", apple: "/images/apple-touch-icon.png" },
+  icons: { icon: "/icon.png", apple: "/images/apple-touch-icon.png" },
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1 };
