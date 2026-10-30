@@ -69,10 +69,28 @@ export function SacredGarden() {
         if (!document.hidden) v.play().catch(() => {});
       });
     });
+    loops.forEach((v) => {
+      // si la boucle native échoue (certains téléphones), on repart du début
+      v.addEventListener("ended", () => {
+        v.currentTime = 0;
+        v.play().catch(() => {});
+      });
+      v.addEventListener("stalled", () => v.play().catch(() => {}));
+    });
     const onVisible = () => {
       if (!document.hidden) loops.forEach((v) => v.play().catch(() => {}));
     };
     document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("pageshow", onVisible);
+    window.addEventListener("pointerdown", onVisible, { passive: true });
+    // filet de sécurité : toute vidéo visible en pause est relancée
+    const videoWatchdog = setInterval(() => {
+      if (document.hidden) return;
+      for (const v of loops) {
+        const r = v.getBoundingClientRect();
+        if (v.paused && r.bottom > 0 && r.top < window.innerHeight) v.play().catch(() => {});
+      }
+    }, 2500);
     return () => {
       stopMotion();
       cancelAnimationFrame(lenisRaf);
@@ -80,6 +98,9 @@ export function SacredGarden() {
       lockObserver.disconnect();
       io.disconnect();
       document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("pageshow", onVisible);
+      window.removeEventListener("pointerdown", onVisible);
+      clearInterval(videoWatchdog);
     };
   }, []);
 

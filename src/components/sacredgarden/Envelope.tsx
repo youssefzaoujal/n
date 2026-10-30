@@ -25,8 +25,48 @@ export function Envelope({ envelope, video, music }: EnvelopeProps) {
   const [buttonVisible, setButtonVisible] = useState(false);
   const [playing, setPlaying] = useState(true);
 
+  /** true seulement quand l'invitée a mis la musique en pause avec le bouton. */
+  const userPaused = useRef(false);
+
   useEffect(() => {
     videoRef.current?.load();
+  }, []);
+
+  // La musique tourne en boucle sans jamais s'arrêter (sauf si l'invitée appuie sur pause) :
+  // relance après une coupure, un retour sur l'onglet, un appel, une mise en veille…
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.loop = true;
+    const resume = () => {
+      if (!done.current || userPaused.current || document.hidden) return;
+      if (audio.paused) audio.play().catch(() => {});
+    };
+    const onEnded = () => {
+      audio.currentTime = 0;
+      resume();
+    };
+    const onPause = () => setTimeout(resume, 400);
+    audio.addEventListener("ended", onEnded);
+    audio.addEventListener("pause", onPause);
+    audio.addEventListener("stalled", resume);
+    document.addEventListener("visibilitychange", resume);
+    window.addEventListener("focus", resume);
+    window.addEventListener("pageshow", resume);
+    // au cas où le navigateur l'aurait suspendue sans prévenir
+    const watchdog = setInterval(resume, 3000);
+    // certains téléphones exigent un geste : on relance au prochain toucher
+    window.addEventListener("pointerdown", resume, { passive: true });
+    return () => {
+      audio.removeEventListener("ended", onEnded);
+      audio.removeEventListener("pause", onPause);
+      audio.removeEventListener("stalled", resume);
+      document.removeEventListener("visibilitychange", resume);
+      window.removeEventListener("focus", resume);
+      window.removeEventListener("pageshow", resume);
+      window.removeEventListener("pointerdown", resume);
+      clearInterval(watchdog);
+    };
   }, []);
 
   // Samsung/Android: prime the audio on touchstart, start the sequence on click.
@@ -92,9 +132,11 @@ export function Envelope({ envelope, video, music }: EnvelopeProps) {
     const audio = audioRef.current;
     if (!audio) return;
     if (audio.paused) {
+      userPaused.current = false;
       audio.play().catch(() => {});
       setPlaying(true);
     } else {
+      userPaused.current = true;
       audio.pause();
       setPlaying(false);
     }
