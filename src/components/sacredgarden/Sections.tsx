@@ -102,24 +102,6 @@ export function TimeSection() {
           <img className="sg-s-ornament" src={ORNAMENT} alt="" aria-hidden="true" />
         </div>
 
-        <div {...reveal("zoomin", 0.15, 1.8, "sg-time-arch")}>
-          <svg className="sg-time-clock" viewBox="0 0 48 48" aria-hidden="true">
-            <circle cx="24" cy="26" r="17" />
-            <path d="M24 15v11l7 5M19 5h10M24 5v4" />
-          </svg>
-          {known ? (
-            <p className="sg-time-hour">{invitation.time}</p>
-          ) : (
-            <p className="sg-time-hour mystery" aria-label="Heure encore secrète">
-              <span>?</span>
-              <span>?</span>
-              <i>h</i>
-              <span>?</span>
-              <span>?</span>
-            </p>
-          )}
-          <p className="sg-time-date">Mercredi 11 novembre</p>
-        </div>
 
         {known ? (
           <p {...reveal("fadeinup", 0.2, 1.6, "sg-s-text")}>
