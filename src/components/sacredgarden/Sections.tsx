@@ -104,9 +104,15 @@ export function TimeSection() {
 
 
         {known ? (
-          <p {...reveal("fadeinup", 0.2, 1.6, "sg-s-text")}>
-            L&apos;anniversaire commencera à {invitation.time}. On vous attend <span className="sg-heart">♡</span>
-          </p>
+          <>
+            <div {...reveal("zoomin", 0.15, 1.8, "sg-time-reveal")}>
+              <p className="sg-time-hour">{invitation.time.replace(/h$/, "h00")}</p>
+              <p className="sg-time-date">Mercredi 11 novembre · Dar Tanja</p>
+            </div>
+            <p {...reveal("fadeinup", 0.3, 1.6, "sg-s-text")}>
+              L&apos;anniversaire commencera à {invitation.time}. On vous attend <span className="sg-heart">♡</span>
+            </p>
+          </>
         ) : (
           <div {...reveal("fadeinup", 0.2)}>
             <p className="sg-s-text">L&apos;heure exacte de la célébration n&apos;est pas encore fixée.</p>

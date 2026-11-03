@@ -1946,3 +1946,17 @@ html.lenis body {
   max-width: 100%;
   object-fit: fill;
 }
+
+/* Heure dévoilée */
+.sg-time-reveal {
+  margin: 34px auto 6px;
+}
+
+.sg-time-reveal .sg-time-hour {
+  font-size: 58px;
+  letter-spacing: 0.08em;
+}
+
+.sg-time-reveal .sg-time-date {
+  margin-top: 10px;
+}
