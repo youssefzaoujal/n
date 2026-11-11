@@ -99,7 +99,6 @@ export const youssefLines: string[] = [
   "And if I could give you one gift today, ce serait de te permettre de te voir à travers mes yeux, just for a moment. Pour que tu comprennes enfin how precious, beautiful and irreplaceable you are to me",
   "Happy Birthday, my beautiful girl, mon amour, my pink diamond 🎂❤️",
   "Je prie pour que every dream you carry in your heart devienne réalité, que la vie te protège, qu'elle t'offre all the happiness you deserve, et que ton magnifique sourire never fades away",
-  "Aujourd'hui, the whole world celebrates love once a year… mais moi, I celebrate loving you every single day, à chaque instant, with every heartbeat",
   "Je t'aime d'un amour that even the most beautiful words in the world could never fully describe",
   "Attends, attends, mon amour… ❤️ Before I finish, j’ai un petit message pour tes amies qui sont avec toi aujourd’hui… Girls, j’ai juste une petite chose à vous dire… 🥹❤️",
   "Nouha is not just someone special to me, Nouha amana entre vos mains ❤️",
