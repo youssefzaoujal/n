@@ -37,13 +37,13 @@ function Paragraphs({ text }: { text: string }) {
 }
 
 /** Une ligne de la lettre : les mots apparaissent un à un. */
-function Words({ text }: { text: string }) {
+function Words({ text, delay = 0.2 }: { text: string; delay?: number }) {
   const words = text.split(" ");
   const step = Math.min(0.13, 2.4 / words.length);
   return (
     <>
       {words.map((w, i) => (
-        <span key={i} className="ms-w" style={{ animationDelay: `${0.2 + i * step}s` }}>
+        <span key={i} className="ms-w" style={{ animationDelay: `${delay + i * step}s` }}>
           {w}{" "}
         </span>
       ))}
@@ -241,32 +241,49 @@ function vibrate(ms: number | number[]) {
   }
 }
 
-/** Enveloppe à ouvrir avant chaque mot doux. */
-function Envelope({ index, total, onOpened }: { index: number; total: number; onOpened: () => void }) {
-  const [open, setOpen] = useState(false);
+const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+
+/** Interlude avant chaque mot doux : un chiffre d'or, une phrase-indice, un cœur qui se dessine. */
+function Interlude({ index, total, hint, onOpen }: { index: number; total: number; hint: string; onOpen: () => void }) {
+  const [going, setGoing] = useState(false);
   const click = (e: React.MouseEvent) => {
-    if (open) return;
-    setOpen(true);
-    vibrate(30);
-    burst(e.clientX, e.clientY, 16);
-    setTimeout(onOpened, 1650);
+    if (going) return;
+    setGoing(true);
+    vibrate([20, 40, 60]);
+    burst(e.clientX, e.clientY, 18);
+    setTimeout(onOpen, 1100);
   };
   return (
-    <div className="ms-env-wrap">
-      <p className="ms-kicker">
-        Mot doux {index + 1} sur {total}
+    <section className={`ms-screen ms-inter ${going ? "go" : ""}`} onClick={click}>
+      <span className="ms-inter-glow" aria-hidden="true" />
+      <div className="ms-inter-num ms-in" style={{ animationDelay: ".2s" }}>
+        <i />
+        <span>{ROMAN[index] ?? index + 1}</span>
+        <i />
+      </div>
+      <p className="ms-kicker ms-in" style={{ animationDelay: ".7s" }}>
+        Mot doux · {index + 1} sur {total}
       </p>
-      <button type="button" className={`ms-env ${open ? "open" : ""}`} onClick={click} aria-label="Ouvrir l'enveloppe">
-        <span className="ms-env-back" />
-        <span className="ms-env-paper">
-          <span className="ms-env-paper-txt">Pour Nouha ♡</span>
-        </span>
-        <span className="ms-env-front" />
-        <span className="ms-env-flap" />
-        <img className="ms-env-seal" src={SEAL} alt="" draggable={false} />
-      </button>
-      <p className={`ms-env-hint ${open ? "hide" : ""}`}>Touche le sceau pour l&apos;ouvrir</p>
-    </div>
+      <p className="ms-inter-hint">
+        <Words text={hint} delay={1.3} />
+      </p>
+      <div className="ms-inter-heart">
+        <svg viewBox="0 0 100 92" aria-hidden="true">
+          <defs>
+            <linearGradient id="msHeartGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="#f6e2a8" />
+              <stop offset=".5" stopColor="#c9a456" />
+              <stop offset="1" stopColor="#8f2a35" />
+            </linearGradient>
+          </defs>
+          <path
+            className="ms-heart-path"
+            d="M50 88 C20 66 4 50 4 30 C4 15 15 4 29 4 C39 4 46 10 50 18 C54 10 61 4 71 4 C85 4 96 15 96 30 C96 50 80 66 50 88 Z"
+          />
+        </svg>
+      </div>
+      <p className="ms-inter-tap">Touche pour lire</p>
+    </section>
   );
 }
 
@@ -633,14 +650,22 @@ export function MessagesExperience() {
 
       {/* ───────── Les mots des amies ───────── */}
       {stage.k === "msg" && !opened && (
-        <section className="ms-screen ms-envscreen" key={`e${stage.i}`}>
+        <div className="ms-interwrap" key={`e${stage.i}`}>
           <div className="ms-progress" aria-hidden="true">
             {friendMessages.map((_, i) => (
               <i key={i} className={i < stage.i ? "on" : i === stage.i ? "now" : ""} />
             ))}
           </div>
-          <Envelope index={stage.i} total={total} onOpened={() => setOpened(true)} />
-        </section>
+          <Interlude
+            index={stage.i}
+            total={total}
+            hint={friendMessages[stage.i].hint}
+            onOpen={() => {
+              setOpened(true);
+              window.scrollTo({ top: 0 });
+            }}
+          />
+        </div>
       )}
 
       {stage.k === "msg" && opened && (
@@ -697,7 +722,10 @@ export function MessagesExperience() {
       {stage.k === "bridge" && (
         <section className="ms-screen ms-bridge">
           <p className="ms-night-soft ms-in" style={{ animationDelay: "1s" }}>
-            Tu as lu tous les mots…
+            {total} mots. {total} cœurs. Tous pour toi.
+          </p>
+          <p className="ms-night-soft ms-in" style={{ animationDelay: "2.2s" }}>
+            Tu les as tous lus…
           </p>
           <p className="ms-night-lead ms-in" style={{ animationDelay: "3s" }}>
             Enfin, presque.

@@ -4,12 +4,15 @@
  * Pour un message en arabe, ajoute rtl: true.
  */
 export interface FriendMessage {
+  /** Petite phrase-indice affichée avant le mot (pour aider à deviner). */
+  hint: string;
   text: string;
   rtl?: boolean;
 }
 
 export const friendMessages: FriendMessage[] = [
   {
+    hint: "Quelqu’un qui partage ta vie depuis tant d’années…",
     text: `Après toutes ces années, on a partagé tellement de choses, de souvenirs, de discussions et de moments précieux que je garderai toujours dans mon cœur.
 
 Tu es bien plus qu’une amie, tu es ma confidente, mon repère, ma sœur de cœur. Peu importe le temps qui passe, tu garderas toujours une place toute particulière dans ma vie.
@@ -17,12 +20,14 @@ Tu es bien plus qu’une amie, tu es ma confidente, mon repère, ma sœur de cœ
 À toutes ces années passées ensemble et surtout à toutes celles qui nous attendent encore. Joyeux anniversaire ! ❤️`,
   },
   {
+    hint: "Quelqu’un qui t’aime depuis treize ans…",
     rtl: true,
     text: `🌻شي ناس كيدوزو فحياتنا، وشي ناس كيسكنو فالقلب. ❤️نتي سكنتي و شديتي بلاصتك للأبد. 13 عام ديال العشرة النقية، وكنشهد قدام الله اني ما شفت منك غير الزوين🥹.
 
 نتي special ديالي، الأولى والأخيرة. الله يخليك ليا. الله يرزقك فرحة ما كتسالاش، وراحة البال، ويخليك ديما منورة. ويا ربي نبقاو صحابات حتى للجنة.❤️🥰`,
   },
   {
+    hint: "Quelqu’un qui a séché tes larmes, ces quatre dernières années…",
     text: `To the shoulder I always lean on, to the hands that have wiped away my tears, to the embrace that has sheltered me from my own tribulations, and to the eyes that have always comforted me: I wish you the happiest of birthdays, my Noughi d’amour ❤️❤️
 
 May this year bring you all the comfort, happiness, and prosperity your heart desires. These past four years have been filled with new adventures, and I’m so thrilled to have experienced them by your side. We’ve been through so much, and I’m so glad we’ve always stuck together. Now we’re practically glued to one another. Hsaltii!!
@@ -34,6 +39,7 @@ Happy birthday, sunshine. I love you so, so much! !! Lah ykhalina n baetna wlah 
 Bisous maxxx`,
   },
   {
+    hint: "Quelqu’un pour qui le temps n’a fait que rendre votre amitié plus forte…",
     text: `They say some friendships lose their beauty over time, but ours has proved otherwise. We are growing together without growing apart, and I'm truly proud that our friendship is one of those rare ones that only gets stronger with time.
 
 I'm truly grateful for this friendship, where we can always be our authentic selves, feel completely comfortable, and find a safe space amid life's challenges.
@@ -45,6 +51,7 @@ P.S. I'm still waiting for my share of 🍫
 Happy Birthday! ❤️`,
   },
   {
+    hint: "Quelqu’un qui a vu tes yeux briller le jour où il est entré dans ta vie…",
     text: `Happiest birthday to a truly wonderful soul,
 I am so grateful to have you Noughi❤️,
 May life always surprise you with blessings, happiness and moments as beautiful as you are.
