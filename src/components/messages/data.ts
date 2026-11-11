@@ -90,7 +90,7 @@ export const youssefTitle = "11.11 ❤️🎂 | Happy Birthday, My Pink Diamond"
 export const youssefLines: string[] = [
   "11.11… ❤️",
   "Have you ever looked at these numbers et tu t'es déjà demandé pourquoi ils sont aussi beaux ensemble ?",
-  "Two ones, standing side by side… comme deux âmes, un homme et une femme, qui choisissent d'avancer ensemble, hand in hand, heart to heart 🥹❤️",
+  "Two ones, standing side by side… comme deux âmes, toi et moi, Nouha et Youssef, qui choisissent d'avancer ensemble, hand in hand, heart to heart 🥹❤️",
   "Maybe that's why they call 11/11 the International Day of Love. Parce que l'amour, ce n'est pas simplement deux personnes qui se regardent… it's about two hearts standing together, facing the same future ❤️",
   "Mais tu sais ce qui rend cette date even more magical to me ? C'est que le jour où the whole world celebrates love, c'est aussi le jour où toi, mon plus bel amour, t'es née 🥹❤️",
   "And I don't believe that's just a coincidence. Ptt que l'univers savait qu'une personne aussi belle que toi deserved to be born on a day dedicated to love itself",
