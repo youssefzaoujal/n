@@ -484,3 +484,7 @@
 .ms-final-love { --u: calc(min(100vw, 100vh) / 36); transform: translateY(calc(var(--u) * 2.54 + var(--ink, 0px))); animation: msLoveIn3 3s cubic-bezier(.2, .7, .2, 1) 4.6s forwards, msLoveGlow2 3.5s ease-in-out 7.6s infinite; }
 @keyframes msLoveIn3 { from { opacity: 0; filter: blur(14px); } to { opacity: 1; filter: none; } }
 .ms-final-love { --ink: 0.05em; }
+.ms-inter-num i:last-child { transform: scaleX(-1); transform-origin: center; }
+/* Fin : « Je t'aime » sous le cœur */
+.ms-final { align-items: flex-start; }
+.ms-final-love { position: absolute; left: 0; right: 0; top: var(--love-top, 62vh); text-align: center; --ink: 0px; transform: none; }

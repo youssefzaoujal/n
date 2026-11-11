@@ -85,28 +85,26 @@ Je t’aime fort habibati, enjoy your day to the fullest! 🥹🫶🏻`,
 ];
 
 /** La lettre de Youssef, lue ligne par ligne à la fin. La première ligne sert de titre. */
-export const youssefTitle = "11.11 ❤️🎂 | Happy Birthday, My Love.";
+export const youssefTitle = "11.11 ❤️🎂 | Happy Birthday, My Pink Diamond";
 
 export const youssefLines: string[] = [
   "11.11… ❤️",
   "Have you ever looked at these numbers et tu t'es déjà demandé pourquoi ils sont aussi beaux ensemble ?",
-  "Two ones, standing side by side… comme deux âmes, un homme et une femme, qui choisissent d'avancer ensemble, hand in hand, heart to heart. 🥹❤️",
-  "Maybe that's why they call 11/11 the International Day of Love. Parce que l'amour, ce n'est pas simplement deux personnes qui se regardent… it's about two hearts standing together, facing the same future. ❤️",
-  "Mais tu sais ce qui rend cette date even more magical to me ? C'est que le jour où the whole world celebrates love, c'est aussi le jour où toi, mon plus bel amour, tu es née. 🥹❤️",
-  "And I don't believe that's just a coincidence. Peut-être que l'univers savait qu'une personne aussi belle que toi deserved to be born on a day dedicated to love itself.",
-  "They say 11:11 is the perfect time to make a wish… Mais comment pourrais-je demander quelque chose de plus à l'univers, when the most beautiful wish of my life is already you? ❤️",
-  "Si on me demandait what I love the most about you, je ne saurais même pas par où commencer. Ton sourire, tes yeux, ta douceur, ton cœur, all those little details that make you YOU… everything about you makes my world a little more beautiful.",
-  "And if I could give you one gift today, ce serait de te permettre de te voir à travers mes yeux, just for a moment. Pour que tu comprennes enfin how precious, beautiful and irreplaceable you are to me.",
-  "Happy Birthday, my beautiful girl, mon amour, my favorite person. 🎂❤️",
-  "Je prie pour que every dream you carry in your heart devienne réalité, que la vie te protège, qu'elle t'offre all the happiness you deserve, et que ton magnifique sourire never fades away.",
-  "And in this life, dans une autre vie, in a thousand different lives… je te retrouverais, I would still choose you, et je retomberais amoureux de toi. Every. Single. Time. ❤️",
-  "Aujourd'hui, the whole world celebrates love once a year… mais moi, I celebrate loving you every single day, à chaque instant, with every heartbeat.",
-  "11.11 — The day the world celebrates love, et le jour où ma personne préférée au monde est née. ❤️♾️",
-  "Je t'aime d'un amour that even the most beautiful words in the world could never fully describe.",
+  "Two ones, standing side by side… comme deux âmes, un homme et une femme, qui choisissent d'avancer ensemble, hand in hand, heart to heart 🥹❤️",
+  "Maybe that's why they call 11/11 the International Day of Love. Parce que l'amour, ce n'est pas simplement deux personnes qui se regardent… it's about two hearts standing together, facing the same future ❤️",
+  "Mais tu sais ce qui rend cette date even more magical to me ? C'est que le jour où the whole world celebrates love, c'est aussi le jour où toi, mon plus bel amour, t'es née 🥹❤️",
+  "And I don't believe that's just a coincidence. Ptt que l'univers savait qu'une personne aussi belle que toi deserved to be born on a day dedicated to love itself",
+  "They say 11:11 is the perfect time to make a wish… Mais comment pourrais-je demander qlq chose de plus à l'univers, when the most beautiful wish of my life is already you? ❤️",
+  "If someone asked me what I love the most about you, I wouldn't know where to begin. Ton sourire, tes yeux, ta douceur, ton cœur, ta façon de rendre les journées ordinaires extraordinaires… I love every little detail that makes you YOU",
+  "And if I could give you one gift today, ce serait de te permettre de te voir à travers mes yeux, just for a moment. Pour que tu comprennes enfin how precious, beautiful and irreplaceable you are to me",
+  "Happy Birthday, my beautiful girl, mon amour, my pink diamond 🎂❤️",
+  "Je prie pour que every dream you carry in your heart devienne réalité, que la vie te protège, qu'elle t'offre all the happiness you deserve, et que ton magnifique sourire never fades away",
+  "Aujourd'hui, the whole world celebrates love once a year… mais moi, I celebrate loving you every single day, à chaque instant, with every heartbeat",
+  "Je t'aime d'un amour that even the most beautiful words in the world could never fully describe",
   "Attends, attends, mon amour… ❤️ Before I finish, j’ai un petit message pour tes amies qui sont avec toi aujourd’hui… Girls, j’ai juste une petite chose à vous dire… 🥹❤️",
-  "Nouha is not just someone special to me, hiya amana entre vos mains. 🥹❤️",
+  "Nouha is not just someone special to me, Nouha amana entre vos mains ❤️",
   "Alors thalaw fiha svp, take good care of her, faites-la rire, entourez-la d’amour et surtout, make sure that beautiful smile never leaves her face.",
-  "Because you're not just celebrating her birthday today… you're celebrating someone who means the whole world to me. ❤️",
+  "Because you're not just celebrating her birthday today… you're celebrating someone who means the whole world to me ❤️",
   "Happy Birthday, mon amour. You are my 11:11 wish that came true. 🥹❤️🎂",
 ];
 

@@ -113,6 +113,14 @@ function Sky({ night, heart }: { night: boolean; heart: boolean }) {
       }));
     };
 
+    /* Cœur en haut, « Je t'aime » en dessous : l'ensemble est centré dans l'écran. */
+    const TEXT_BLOCK = 100; // espace + hauteur du texte sous le cœur
+    const heartLayout = () => {
+      const scale = Math.min(W, H) / 36;
+      const total = 28.92 * scale + TEXT_BLOCK;
+      const top = (H - total) / 2;
+      return { cy: top + 11.92 * scale, scale, textTop: top + 28.92 * scale + 26 };
+    };
     const resize = () => {
       W = window.innerWidth;
       H = window.innerHeight;
@@ -133,6 +141,7 @@ function Sky({ night, heart }: { night: boolean; heart: boolean }) {
         ph: Math.random() * 6.28,
       }));
       if (hstars.length) makeHeart();
+      c.parentElement?.style.setProperty("--love-top", `${heartLayout().textTop}px`);
     };
     resize();
     window.addEventListener("resize", resize);
@@ -164,8 +173,7 @@ function Sky({ night, heart }: { night: boolean; heart: boolean }) {
           }
           const ease = easeInOut(Math.min(1, (t - heartStart) / 5000));
           const cx = W / 2;
-          const cy = H / 2;
-          const scale = Math.min(W, H) / 36;
+          const { cy, scale } = heartLayout();
           ctx.save();
           ctx.shadowBlur = 8;
           ctx.shadowColor = "rgba(255,45,107,0.6)";
@@ -282,20 +290,14 @@ function Interlude({ index, total, onOpen }: { index: number; total: number; onO
 
 /** Jeu « devine qui » : compte à rebours 3 · 2 · 1. */
 function Guess() {
-  const [n, setN] = useState<number | null>(null);
+  const [shown, setShown] = useState(false);
   const start = () => {
-    vibrate(20);
-    setN(3);
-    setTimeout(() => { setN(2); vibrate(20); }, 900);
-    setTimeout(() => { setN(1); vibrate(20); }, 1800);
-    setTimeout(() => {
-      setN(0);
-      vibrate([60, 40, 120]);
-    }, 2700);
+    vibrate(30);
+    setShown(true);
   };
   return (
     <div className="ms-guess">
-      {n === null && (
+      {!shown && (
         <>
           <p className="ms-guess-q">Alors… qui a écrit ce mot ? 🤔</p>
           <button type="button" className="ms-btn ghost" onClick={start}>
@@ -303,14 +305,9 @@ function Guess() {
           </button>
         </>
       )}
-      {n !== null && n > 0 && (
-        <p className="ms-count" key={n}>
-          {n}
-        </p>
-      )}
-      {n === 0 && (
+      {shown && (
         <p className="ms-guess-a">
-          Maintenant ! Dis son prénom à voix haute…
+          Dis son prénom à voix haute…
           <br />
           et regarde qui sourit ✨
         </p>
