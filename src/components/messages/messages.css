@@ -431,3 +431,52 @@
 .ms-letter { margin-top: 10px; }
 .ms-inter-hint, .ms-lead, .ms-night-soft, .ms-film-line { text-wrap: balance; }
 .ms-inter-num span { background-image: linear-gradient(105deg, #7a5a1f, #a67d2b 30%, #e2c27a 48%, #f6e2a8 52%, #b48c3d 64%, #7a5a1f); }
+
+/* ───────── v4 ───────── */
+/* Accueil : sceau YN bien plus grand */
+.ms-start-seal { width: min(210px, 54vw); height: min(210px, 54vw); }
+.ms-start-seal img { width: 80%; }
+.ms-start-tap { margin-top: 18px; }
+
+/* Boutons plus fins et élégants */
+.ms-nav { padding-top: 14px; }
+.ms-nav .ms-btn {
+  margin-top: 0; padding: 11px 22px; font-size: 11px; letter-spacing: .26em;
+  background: transparent; color: var(--wine);
+  box-shadow: 0 0 0 1px rgba(143, 42, 53, .55) inset;
+}
+.ms-nav .ms-btn::after { display: none; }
+.ms-nav .ms-btn:active { background: rgba(143, 42, 53, .06); }
+.ms-nav .ms-link { font-size: 11px; letter-spacing: .26em; color: #9a7f4b; }
+.ms-btn { padding: 13px 28px; font-size: 12px; }
+.ms-film-ctrl { gap: 2px; width: min(300px, calc(100% - 48px)); }
+.ms-ctl { width: 34px; height: 34px; font-size: 0; color: rgba(240, 222, 180, .7); }
+.ms-film-bar { height: 1px; }
+
+/* Fin : « Je t'aime » au centre du cœur d'étoiles */
+.ms-final { position: fixed; inset: 0; z-index: 4; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.ms-final-love {
+  margin: 0; transform: translateY(-4vh);
+  font-family: "MsScript", cursive; font-size: clamp(56px, 15vw, 104px); line-height: 1;
+  color: #f6e3b4; text-shadow: 0 0 30px rgba(233, 207, 143, .55), 0 0 80px rgba(233, 207, 143, .25);
+  opacity: 0; animation: msLoveIn 3s cubic-bezier(.2, .7, .2, 1) 2.6s forwards, msLoveGlow 4s ease-in-out 5.6s infinite;
+}
+@keyframes msLoveIn { from { opacity: 0; filter: blur(14px); transform: translateY(-4vh) scale(.94); } to { opacity: 1; filter: none; transform: translateY(-4vh); } }
+@keyframes msLoveGlow { 0%, 100% { text-shadow: 0 0 30px rgba(233, 207, 143, .5), 0 0 80px rgba(233, 207, 143, .2); } 50% { text-shadow: 0 0 40px rgba(233, 207, 143, .8), 0 0 110px rgba(233, 207, 143, .35); } }
+.ms-inter-tap { margin-top: 34px; animation: msIn 1s ease 1.4s forwards, msBlink 2.4s ease-in-out 2.4s infinite; }
+/* Interlude plus présent */
+.ms-inter-num span { font-size: clamp(96px, 30vw, 150px); background-image: linear-gradient(105deg, #6e4f17, #9c7629 30%, #d4b25f 48%, #ecd08c 52%, #a67d2b 64%, #6e4f17); }
+.ms-inter-num i { width: clamp(50px, 18vw, 100px); }
+.ms-inter .ms-kicker { font-size: 13px; color: #7d5f24; margin-top: 6px; }
+.ms-inter-tap { color: var(--wine); font-size: 12px; }
+/* Rose en haut à droite de la lettre */
+.ms-letter-rose { top: -30px; right: -20px; bottom: auto; width: 116px; transform: rotate(14deg); z-index: 2; }
+.ms-letter-hello { padding-right: 70px; }
+/* « Je t'aime » au centre du cœur (lueur rose comme les étoiles) */
+.ms-final-love {
+  transform: translateY(1.5vh); color: #fff6f8;
+  text-shadow: 0 0 12px rgba(255, 45, 107, .7), 0 0 34px rgba(255, 45, 107, .45), 0 0 70px rgba(255, 45, 107, .25);
+  animation: msLoveIn2 3s cubic-bezier(.2, .7, .2, 1) 4.6s forwards, msLoveGlow2 3.5s ease-in-out 7.6s infinite;
+}
+@keyframes msLoveIn2 { from { opacity: 0; filter: blur(14px); transform: translateY(1.5vh) scale(.94); } to { opacity: 1; filter: none; transform: translateY(1.5vh); } }
+@keyframes msLoveGlow2 { 0%, 100% { text-shadow: 0 0 12px rgba(255, 45, 107, .7), 0 0 34px rgba(255, 45, 107, .45), 0 0 70px rgba(255, 45, 107, .25); } 50% { text-shadow: 0 0 16px rgba(255, 45, 107, .9), 0 0 48px rgba(255, 45, 107, .6), 0 0 100px rgba(255, 45, 107, .35); } }

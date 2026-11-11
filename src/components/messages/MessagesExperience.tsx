@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ANSWER, friendMessages, questions, youssefLines, youssefTitle, girlsLines, MUSIC, MUSIC_FINALE } from "./data";
+import { ANSWER, friendMessages, questions, youssefLines, youssefTitle, girlsLines, MUSIC } from "./data";
 
 const IMG = "/sites/thesacredgarden/images";
 const SEAL = `${IMG}/seal-yn.png`;
@@ -69,30 +69,60 @@ function Sky({ night, heart }: { night: boolean; heart: boolean }) {
     const dpr = Math.min(2, window.devicePixelRatio || 1);
     let W = 0;
     let H = 0;
-    type Star = { x: number; y: number; cx: number; cy: number; r: number; tw: number; ph: number; t: number };
+    type Star = { x: number; y: number; cx: number; cy: number; r: number; tw: number; ph: number; kind: 0 | 1 | 2; hx: number; hy: number };
     type Dust = { x: number; y: number; r: number; vx: number; vy: number; ph: number };
     type Shoot = { x: number; y: number; vx: number; vy: number; life: number };
     let stars: Star[] = [];
     let dust: Dust[] = [];
     const shoots: Shoot[] = [];
-    const HEART_N = 150;
+
+    /* Cœur en étoiles : 200 étoiles dispersées qui se rassemblent une à une. */
+    const heartPoint = (t: number) => {
+      const x = 16 * Math.pow(Math.sin(t), 3);
+      const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+      return [x, -y];
+    };
+    const HEART_N = 200;
+    // points répartis régulièrement le long du contour
+    const dense: number[][] = [];
+    const cum: number[] = [0];
+    for (let i = 0; i <= 3000; i++) {
+      dense.push(heartPoint((Math.PI * 2 * i) / 3000));
+      if (i > 0) cum.push(cum[i - 1] + Math.hypot(dense[i][0] - dense[i - 1][0], dense[i][1] - dense[i - 1][1]));
+    }
+    const totalLen = cum[cum.length - 1];
+    const outline: number[][] = [];
+    for (let k = 0, j = 0; k < HEART_N; k++) {
+      const target = (totalLen * k) / HEART_N;
+      while (cum[j] < target) j++;
+      outline.push(dense[j]);
+    }
+
+    type HStar = { sx: number; sy: number; tx: number; ty: number; r: number; tw: number; delay: number };
+    let hstars: HStar[] = [];
+    let heartStart = -1;
+    const makeHeart = () => {
+      hstars = outline.map(([tx, ty]) => ({
+        sx: Math.random() * W,
+        sy: Math.random() * H,
+        tx,
+        ty,
+        r: 1 + Math.random() * 1.6,
+        tw: Math.random() * 6.28,
+        delay: Math.random() * 0.5,
+      }));
+    };
+
     const resize = () => {
       W = window.innerWidth;
       H = window.innerHeight;
       c.width = W * dpr;
       c.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = Math.max(HEART_N + 60, Math.round((W * H) / 2600));
-      stars = Array.from({ length: n }, (_, i) => {
+      stars = Array.from({ length: Math.round((W * H) / 3000) }, () => {
         const x = Math.random() * W;
         const y = Math.random() * H;
-        return {
-          x, y, cx: x, cy: y,
-          r: i < HEART_N ? 0.9 + Math.random() * 0.9 : Math.random() * 1.3 + 0.2,
-          tw: 0.6 + Math.random() * 2,
-          ph: Math.random() * 6.28,
-          t: i < HEART_N ? (Math.PI * 2 * i) / HEART_N : -1,
-        };
+        return { x, y, cx: x, cy: y, r: Math.random() * 1.3 + 0.2, tw: 0.6 + Math.random() * 2, ph: Math.random() * 6.28, kind: 0 as const, hx: 0, hy: 0 };
       });
       dust = Array.from({ length: Math.min(46, Math.round((W * H) / 20000)) }, () => ({
         x: Math.random() * W,
@@ -102,55 +132,60 @@ function Sky({ night, heart }: { night: boolean; heart: boolean }) {
         vy: -(0.08 + Math.random() * 0.25),
         ph: Math.random() * 6.28,
       }));
+      if (hstars.length) makeHeart();
     };
     resize();
     window.addEventListener("resize", resize);
     let nightAmt = nightRef.current ? 1 : 0;
-    let heartAmt = 0;
     let raf = 0;
     let last = 0;
+    const easeInOut = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
     const draw = (t: number) => {
       const dt = Math.min(50, t - (last || t));
       last = t;
       nightAmt += ((nightRef.current ? 1 : 0) - nightAmt) * 0.02;
-      heartAmt += ((heartRef.current ? 1 : 0) - heartAmt) * 0.025;
       ctx.clearRect(0, 0, W, H);
       const s = t / 1000;
       if (nightAmt > 0.01) {
-        const hs = Math.min(W * 0.9, H * 0.8) / 34;
-        const hx = W / 2;
-        const hy = H * 0.46;
-        const beat = 1 + 0.035 * Math.pow(Math.max(0, Math.sin(s * 3.2)), 8);
+        // ciel étoilé
         for (const st of stars) {
-          let tx = st.x;
-          let ty = st.y;
-          if (st.t >= 0 && heartAmt > 0.002) {
-            const sn = Math.sin(st.t);
-            const px = 16 * sn * sn * sn;
-            const py = -(13 * Math.cos(st.t) - 5 * Math.cos(2 * st.t) - 2 * Math.cos(3 * st.t) - Math.cos(4 * st.t));
-            tx = st.x + (hx + px * hs * beat - st.x) * heartAmt;
-            ty = st.y + (hy + py * hs * beat - st.y) * heartAmt;
-          }
-          st.cx += (tx - st.cx) * 0.06;
-          st.cy += (ty - st.cy) * 0.06;
-          const inHeart = st.t >= 0 ? heartAmt : 0;
           const a = nightAmt * (0.25 + 0.75 * (0.5 + 0.5 * Math.sin(s * st.tw + st.ph)));
-          const alpha = Math.min(1, a + inHeart * 0.6);
-          if (inHeart > 0.05) {
-            const g = ctx.createRadialGradient(st.cx, st.cy, 0, st.cx, st.cy, st.r * 6);
-            g.addColorStop(0, `rgba(255,226,160,${alpha * 0.55 * inHeart})`);
-            g.addColorStop(1, "rgba(255,226,160,0)");
-            ctx.fillStyle = g;
-            ctx.beginPath();
-            ctx.arc(st.cx, st.cy, st.r * 6, 0, 6.28);
-            ctx.fill();
-          }
-          ctx.fillStyle = `rgba(255,246,225,${alpha})`;
+          ctx.fillStyle = `rgba(255,246,225,${a})`;
           ctx.beginPath();
-          ctx.arc(st.cx, st.cy, st.r, 0, 6.28);
+          ctx.arc(st.x, st.y, st.r, 0, 6.28);
           ctx.fill();
         }
-        const rate = heartRef.current ? 0.04 : 0.012;
+
+        // le cœur
+        if (heartRef.current) {
+          if (heartStart < 0) {
+            heartStart = t;
+            makeHeart();
+          }
+          const ease = easeInOut(Math.min(1, (t - heartStart) / 5000));
+          const cx = W / 2;
+          const cy = H / 2;
+          const scale = Math.min(W, H) / 36;
+          ctx.save();
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = "rgba(255,45,107,0.6)";
+          for (const h of hstars) {
+            const e = Math.max(0, Math.min(1, (ease - h.delay) / (1 - h.delay)));
+            const x = h.sx + (cx + h.tx * scale - h.sx) * e;
+            const y = h.sy + (cy + h.ty * scale - h.sy) * e;
+            h.tw += 0.03 * (dt / 16);
+            const alpha = 0.4 + 0.6 * Math.abs(Math.sin(h.tw));
+            ctx.beginPath();
+            ctx.arc(x, y, h.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+            ctx.fill();
+          }
+          ctx.restore();
+        } else {
+          heartStart = -1;
+        }
+
+        const rate = heartRef.current ? 0.015 : 0.012;
         if (!reduce && Math.random() < rate * nightAmt) {
           const fromLeft = Math.random() < 0.5;
           shoots.push({
@@ -210,29 +245,6 @@ function Sky({ night, heart }: { night: boolean; heart: boolean }) {
   return <canvas ref={ref} className="ms-sky" aria-hidden="true" />;
 }
 
-/** Explosion de cœurs et d'étoiles dorées. */
-function burst(x: number, y: number, n = 26) {
-  const host = document.createElement("div");
-  host.className = "ms-burst";
-  host.style.left = `${x}px`;
-  host.style.top = `${y}px`;
-  const glyphs = ["♥", "✦", "♥", "✧", "♡"];
-  for (let i = 0; i < n; i++) {
-    const s = document.createElement("i");
-    s.textContent = glyphs[i % glyphs.length];
-    const a = Math.random() * Math.PI * 2;
-    const d = 70 + Math.random() * 160;
-    s.style.setProperty("--x", `${Math.cos(a) * d}px`);
-    s.style.setProperty("--y", `${Math.sin(a) * d - 60}px`);
-    s.style.setProperty("--r", `${(Math.random() - 0.5) * 120}deg`);
-    s.style.setProperty("--s", `${0.6 + Math.random() * 1.1}`);
-    s.style.animationDelay = `${Math.random() * 0.15}s`;
-    host.appendChild(s);
-  }
-  document.body.appendChild(host);
-  setTimeout(() => host.remove(), 2600);
-}
-
 function vibrate(ms: number | number[]) {
   try {
     navigator.vibrate?.(ms);
@@ -244,13 +256,12 @@ function vibrate(ms: number | number[]) {
 const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 
 /** Interlude avant chaque mot doux : un chiffre d'or, une phrase-indice, un cœur qui se dessine. */
-function Interlude({ index, total, hint, onOpen }: { index: number; total: number; hint: string; onOpen: () => void }) {
+function Interlude({ index, total, onOpen }: { index: number; total: number; onOpen: () => void }) {
   const [going, setGoing] = useState(false);
-  const click = (e: React.MouseEvent) => {
+  const click = () => {
     if (going) return;
     setGoing(true);
     vibrate([20, 40, 60]);
-    burst(e.clientX, e.clientY, 18);
     setTimeout(onOpen, 1100);
   };
   return (
@@ -264,24 +275,6 @@ function Interlude({ index, total, hint, onOpen }: { index: number; total: numbe
       <p className="ms-kicker ms-in" style={{ animationDelay: ".7s" }}>
         Mot doux · {index + 1} sur {total}
       </p>
-      <p className="ms-inter-hint">
-        <Words text={hint} delay={1.3} />
-      </p>
-      <div className="ms-inter-heart">
-        <svg viewBox="0 0 100 92" aria-hidden="true">
-          <defs>
-            <linearGradient id="msHeartGold" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stopColor="#f6e2a8" />
-              <stop offset=".5" stopColor="#c9a456" />
-              <stop offset="1" stopColor="#8f2a35" />
-            </linearGradient>
-          </defs>
-          <path
-            className="ms-heart-path"
-            d="M50 88 C20 66 4 50 4 30 C4 15 15 4 29 4 C39 4 46 10 50 18 C54 10 61 4 71 4 C85 4 96 15 96 30 C96 50 80 66 50 88 Z"
-          />
-        </svg>
-      </div>
       <p className="ms-inter-tap">Touche pour lire</p>
     </section>
   );
@@ -298,7 +291,6 @@ function Guess() {
     setTimeout(() => {
       setN(0);
       vibrate([60, 40, 120]);
-      burst(window.innerWidth / 2, window.innerHeight * 0.55, 30);
     }, 2700);
   };
   return (
@@ -334,7 +326,6 @@ export function MessagesExperience() {
   const [shakeKey, setShakeKey] = useState(0);
   const [muted, setMuted] = useState(false);
   const [paused, setPaused] = useState(false);
-  const [wishing, setWishing] = useState(false);
   const a1 = useRef<HTMLAudioElement>(null);
   const a2 = useRef<HTMLAudioElement>(null);
   const active = useRef<1 | 2>(1);
@@ -439,10 +430,9 @@ export function MessagesExperience() {
     window.scrollTo({ top: 0 });
   };
 
-  const begin = (e: React.MouseEvent) => {
+  const begin = () => {
     playTrack(1);
     vibrate(25);
-    burst(e.clientX, e.clientY, 20);
     setTimeout(() => go({ k: "gate", q: 0 }), 500);
   };
 
@@ -457,8 +447,6 @@ export function MessagesExperience() {
       setWrong(null);
       setTyped("");
       vibrate(25);
-      const r = e.currentTarget.getBoundingClientRect();
-      burst(r.left + r.width / 2, r.top + r.height / 2, 22);
       setTimeout(() => {
         if (stage.q + 1 < questions.length) setStage({ k: "gate", q: stage.q + 1 });
         else {
@@ -497,29 +485,16 @@ export function MessagesExperience() {
     setStage({ k: "finale", line: stage.line - 1 });
   };
 
-  const wish = (e: React.MouseEvent) => {
-    const r = (e.currentTarget as HTMLElement).getBoundingClientRect();
-    vibrate([50, 80, 50, 80, 200]);
-    burst(r.left + r.width / 2, r.top + r.height / 2, 40);
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setWishing(true);
-    }, 400);
-    setTimeout(() => burst(window.innerWidth / 2, window.innerHeight * 0.46, 40), 3200);
-    setTimeout(() => setWishing(false), 11000);
-  };
-
   return (
-    <main className={`ms-root ${night ? "is-night" : ""} ${wishing ? "is-wishing" : ""}`}>
+    <main className={`ms-root ${night ? "is-night" : ""}`}>
       <audio ref={a1} src={MUSIC} loop preload="auto" playsInline />
-      <audio ref={a2} src={MUSIC_FINALE} loop preload="none" playsInline />
 
       <div className="ms-bg" aria-hidden="true">
         <video className="ms-bg-video" src="/media/swans.mp4" autoPlay muted loop playsInline />
         <div className="ms-bg-veil" />
         <div className="ms-bg-night" />
       </div>
-      <Sky night={night} heart={wishing} />
+      <Sky night={night} heart={stage.k === "end"} />
 
       {stage.k !== "start" && (
         <button
@@ -554,8 +529,7 @@ export function MessagesExperience() {
               <span className="ms-unlock-ring r2" />
               <img src={SEAL} alt="" draggable={false} />
             </span>
-            <span className="ms-start-label">Touche pour commencer</span>
-            <span className="ms-start-sound">🎧 Monte le son</span>
+            <span className="ms-start-label">Touche pour ouvrir le coffre</span>
           </div>
         </section>
       )}
@@ -659,7 +633,6 @@ export function MessagesExperience() {
           <Interlude
             index={stage.i}
             total={total}
-            hint={friendMessages[stage.i].hint}
             onOpen={() => {
               setOpened(true);
               window.scrollTo({ top: 0 });
@@ -688,7 +661,6 @@ export function MessagesExperience() {
             <div className="ms-letter-body" dir={friendMessages[stage.i].rtl ? "rtl" : "ltr"}>
               <Paragraphs text={friendMessages[stage.i].text} />
             </div>
-            <p className="ms-letter-sign">— ? ? ?</p>
           </article>
 
           <Guess key={`g${stage.i}`} />
@@ -696,7 +668,7 @@ export function MessagesExperience() {
           <div className="ms-nav">
             {stage.i > 0 ? (
               <button type="button" className="ms-link" onClick={() => go({ k: "msg", i: stage.i - 1 })}>
-                ← Retour
+                Retour
               </button>
             ) : (
               <span />
@@ -707,7 +679,6 @@ export function MessagesExperience() {
               onClick={() => {
                 if (stage.i + 1 < total) go({ k: "msg", i: stage.i + 1 });
                 else {
-                  playTrack(2);
                   go({ k: "bridge" });
                 }
               }}
@@ -737,9 +708,8 @@ export function MessagesExperience() {
             type="button"
             className="ms-clock ms-in"
             style={{ animationDelay: "7.6s" }}
-            onClick={(e) => {
+            onClick={() => {
               vibrate([30, 40, 30]);
-              burst(e.clientX, e.clientY, 30);
               setTimeout(() => go({ k: "finale", line: -1 }), 700);
             }}
             aria-label="Ouvrir la dernière lettre"
@@ -758,7 +728,11 @@ export function MessagesExperience() {
             {stage.line < 0 ? (
               <>
                 <p className="ms-film-num">11.11</p>
-                <p className="ms-film-title">Happy Birthday, My Love.</p>
+                <p className="ms-film-title">
+                  Happy Birthday,
+                  <br />
+                  My Love.
+                </p>
                 <p className="ms-film-emoji">❤️🎂</p>
               </>
             ) : (
@@ -774,7 +748,7 @@ export function MessagesExperience() {
           </div>
           <div className="ms-film-ctrl" onClick={(e) => e.stopPropagation()}>
             <button type="button" className="ms-ctl" onClick={prevLine} aria-label="Ligne précédente">
-              ‹
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </button>
             <div className="ms-film-bar">
               <i style={{ width: `${((stage.line + 1) / lineCount) * 100}%` }} />
@@ -785,68 +759,21 @@ export function MessagesExperience() {
               onClick={() => setPaused((p) => !p)}
               aria-label={paused ? "Reprendre" : "Pause"}
             >
-              {paused ? "▶" : "❚❚"}
+              {paused ? (<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M7 5l12 7-12 7z" fill="currentColor" /></svg>) : (<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>)}
             </button>
             <button type="button" className="ms-ctl" onClick={nextLine} aria-label="Ligne suivante">
-              ›
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </button>
           </div>
           <p className="ms-film-tap">Touche l&apos;écran pour continuer</p>
         </section>
       )}
 
-      {/* ───────── Fin : signature, vidéo, vœu ───────── */}
+      {/* ───────── Fin : « Je t'aime » au cœur d'un cœur d'étoiles ───────── */}
       {stage.k === "end" && (
-        <>
-          <section className="ms-screen ms-end">
-            <div className="ms-arch ms-in" style={{ animationDelay: ".3s" }}>
-              <video src="/media/nouha.mp4" poster="/media/nouha-poster.webp" autoPlay muted loop playsInline />
-            </div>
-            <p className="ms-end-love ms-in" style={{ animationDelay: "1.4s" }}>
-              Je t&apos;aime
-            </p>
-            <p className="ms-end-sign ms-in" style={{ animationDelay: "2.4s" }}>
-              Youssef
-            </p>
-            <p className="ms-night-soft ms-in" style={{ animationDelay: "3.2s" }}>
-              Ton mari, aujourd&apos;hui, demain, et dans toutes nos autres vies ♾️
-            </p>
-            <button type="button" className="ms-btn gold ms-in" style={{ animationDelay: "4s" }} onClick={wish}>
-              ✨ Fais un vœu ✨
-            </button>
-
-            <details className="ms-full ms-in" style={{ animationDelay: "4.6s" }}>
-              <summary>Relire toute la lettre</summary>
-              <div className="ms-full-body">
-                <p className="ms-full-title">{youssefTitle}</p>
-                {youssefLines.map((l, i) => (
-                  <p key={i}>{l}</p>
-                ))}
-                <p className="ms-full-sign">Youssef</p>
-              </div>
-            </details>
-
-            <button
-              type="button"
-              className="ms-link light ms-in"
-              style={{ animationDelay: "5s" }}
-              onClick={() => {
-                playTrack(1);
-                go({ k: "msg", i: 0 });
-              }}
-            >
-              Relire les mots des amies
-            </button>
-          </section>
-          {wishing && (
-            <div className="ms-wish" aria-live="polite">
-              <p className="ms-wish-names">
-                Nouha <span>♡</span> Youssef
-              </p>
-              <p className="ms-wish-text">Ton vœu est entre les étoiles…</p>
-            </div>
-          )}
-        </>
+        <div className="ms-final" aria-live="polite">
+          <p className="ms-final-love">Je t&apos;aime</p>
+        </div>
       )}
     </main>
   );

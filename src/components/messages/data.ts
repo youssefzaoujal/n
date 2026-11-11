@@ -95,14 +95,8 @@ export const questions = [
   { q: "Who thinks Nouha is the most beautiful girl in the universe?", wrong: "Toujours pas 🙈 Indice : son prénom commence par Y…" },
 ];
 
-/**
- * Musiques (domaine public, Wikimedia Commons), en boucle :
- * - MUSIC : pendant les questions et les mots des amies (Chopin, Nocturne op. 9 n° 2)
- * - MUSIC_FINALE : pendant ta lettre, la nuit étoilée (Debussy, Clair de lune)
- * Pour mettre ta propre chanson : dépose le mp3 dans public/media/ et change le chemin ici.
- */
-export const MUSIC = "/media/chopin-nocturne.mp3";
-export const MUSIC_FINALE = "/media/clair-de-lune.mp3";
+/** Musique de fond, en boucle, du coffre jusqu'à la fin (Passacaglia, Handel/Halvorsen). */
+export const MUSIC = "/media/passacaglia.mp3";
 
 /** Lignes de la lettre adressées aux amies (affichées avec « Un mot pour les amies de Nouha »). */
 export const girlsLines = { from: 15, to: 18 };
