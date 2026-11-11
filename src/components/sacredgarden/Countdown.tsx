@@ -80,13 +80,9 @@ export function Countdown() {
     return () => io.disconnect();
   }, []);
 
-  if (time === null) {
-    return (
-      <div id="countdownContainer" ref={ref}>
-        C&apos;est le grand soir !
-      </div>
-    );
-  }
+  // Quand l'heure est passée : on garde le compteur à zéro (0 : 00 : 00 : 00).
+  const done = time === null;
+  const shown = done ? { days: "00", hours: "00", minutes: "00", seconds: "00" } : time;
 
   const r = revealed ? " revealed" : "";
   return (
@@ -97,14 +93,22 @@ export function Countdown() {
           {i > 0 && <div className={`separator sep${i}${r}`}>:</div>}
           <div className="time-block" id={block}>
             <div className="number-wrap">
-              <FlipNumber id={unit} value={time ? time[unit] : unit === "days" ? "168" : "00"} revealed={revealed} />
+              <FlipNumber id={unit} value={shown ? shown[unit] : unit === "days" ? "168" : "00"} revealed={revealed} />
             </div>
             <div className={`label${r}`}>{label}</div>
           </div>
         </div>
       ))}
     </div>
-    <p className="sg-cd-after">L&apos;anniversaire approche…</p>
+    <p className="sg-cd-after">
+      {done ? (
+        <>
+          L&apos;anniversaire a commencé <span className="sg-heart">♡</span>
+        </>
+      ) : (
+        "L'anniversaire approche…"
+      )}
+    </p>
     </div>
   );
 }
