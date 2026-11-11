@@ -717,7 +717,7 @@ export function MessagesExperience() {
                 <p className="ms-film-title">
                   Happy Birthday,
                   <br />
-                  My Love.
+                  My Pink Diamond
                 </p>
                 <p className="ms-film-emoji">❤️🎂</p>
               </>

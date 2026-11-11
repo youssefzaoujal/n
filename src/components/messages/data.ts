@@ -114,8 +114,7 @@ export const ANSWER = "youssef";
 export const questions = [
   { q: "Who loves Nouha the most in this world?", wrong: "Hmm… non 😏 Réfléchissez bien, c'est un homme…" },
   { q: "Who is the luckiest man alive because he has Nouha?", wrong: "Pas du tout 😂 Indice : il est fou d'elle…" },
-  { q: "Who thinks Nouha is the most beautiful girl in the universe?", wrong: "Toujours pas 🙈 Indice : son prénom commence par Y…" },
-];
+  { q: "Who sees Nouha as the most beautiful girl in the universe?", wrong: "Toujours pas 🙈 Indice : son prénom commence par Y…" },];
 
 /** Musique de fond, en boucle, du coffre jusqu'à la fin (Passacaglia, Handel/Halvorsen). */
 export const MUSIC = "/media/passacaglia.mp3";
