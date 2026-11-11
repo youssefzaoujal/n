@@ -1,0 +1,426 @@
+/* ───────── /messages · Les mots doux de Nouha ───────── */
+@font-face { font-family: "MsScript"; src: url("/sites/thesacredgarden/fonts/ImperialScript-Regul.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "MsBeau"; src: url("/sites/thesacredgarden/fonts/BeauRivage-Regular.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "MsSerif"; src: url("/sites/thesacredgarden/fonts/GT_Super_Display_Lig.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "MsCanela"; src: url("/sites/thesacredgarden/fonts/Canela-Light-Trial.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "MsAr"; src: url("/sites/thesacredgarden/fonts/Amiri-Bold.woff") format("woff"); font-display: swap; }
+
+.ms-root {
+  --wine: #8f2a35;
+  --wine-d: #5e1520;
+  --gold: #b48c3d;
+  --gold-l: #e9cf8f;
+  --ink: #4a3a2e;
+  --cream: #fbf3e4;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--ink);
+  font-family: "MsSerif", Georgia, serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+}
+.ms-root *, .ms-root *::before, .ms-root *::after { box-sizing: border-box; }
+.ms-root button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+
+/* Fond */
+.ms-bg { position: fixed; inset: 0; z-index: 0; background: var(--cream); }
+.ms-bg-video { position: absolute; inset: -4%; width: 108%; height: 108%; object-fit: cover; filter: blur(7px) saturate(1.05); transform: scale(1.04); }
+.ms-bg-veil {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(80% 60% at 50% 38%, rgba(255, 250, 240, 0.72), rgba(251, 243, 228, 0.88) 60%, rgba(243, 230, 207, 0.95));
+}
+.ms-bg-night {
+  position: absolute; inset: 0; opacity: 0;
+  background:
+    radial-gradient(90% 70% at 50% 110%, rgba(143, 42, 53, 0.45), transparent 60%),
+    radial-gradient(120% 90% at 50% 0%, #1d1530 0%, #0e0a18 55%, #07050c 100%);
+  transition: opacity 3.5s ease;
+}
+.ms-root.is-night .ms-bg-night { opacity: 1; }
+.ms-sky { position: fixed; inset: 0; z-index: 1; width: 100%; height: 100%; pointer-events: none; }
+
+/* Bouton musique */
+.ms-music {
+  position: fixed; top: calc(14px + env(safe-area-inset-top)); right: 14px; z-index: 30;
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid rgba(180, 140, 61, 0.55);
+  background: rgba(255, 250, 240, 0.7); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center; gap: 3px;
+}
+.is-night .ms-music { background: rgba(20, 14, 30, 0.5); border-color: rgba(233, 207, 143, 0.4); }
+.ms-music span { width: 3px; height: 14px; border-radius: 2px; background: var(--gold); animation: msEq 1s ease-in-out infinite; transform-origin: bottom; }
+.ms-music span:nth-child(2) { animation-delay: 0.2s; }
+.ms-music span:nth-child(3) { animation-delay: 0.4s; }
+.ms-music span:nth-child(4) { animation-delay: 0.1s; }
+.ms-music.off span { animation: none; transform: scaleY(0.25); }
+@keyframes msEq { 0%, 100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
+
+/* Écrans */
+.ms-screen {
+  position: relative; z-index: 2;
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: calc(70px + env(safe-area-inset-top)) 18px calc(40px + env(safe-area-inset-bottom));
+  max-width: 720px; margin: 0 auto;
+  animation: msScreenIn 1.1s cubic-bezier(.2, .7, .2, 1) both;
+}
+@keyframes msScreenIn { from { opacity: 0; transform: translateY(18px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+
+.ms-in { opacity: 0; animation: msIn 1.4s cubic-bezier(.2, .7, .2, 1) forwards; }
+@keyframes msIn { from { opacity: 0; transform: translateY(16px); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
+
+.ms-kicker { font-family: "Cinzel", Georgia, serif; font-size: 12px; letter-spacing: 0.42em; text-transform: uppercase; color: #8a6a2a; margin: 0 0 10px; }
+.ms-script { font-family: "MsScript", cursive; font-weight: 400; color: var(--wine); font-size: clamp(44px, 11vw, 72px); line-height: 1.05; margin: 0; }
+.ms-script.ms-big {
+  font-size: clamp(56px, 15vw, 104px);
+  background: linear-gradient(105deg, #7a1f2a 0%, #8f2a35 30%, #c0606b 48%, #8f2a35 62%, #6a1822 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: msIn 1.4s cubic-bezier(.2, .7, .2, 1) forwards, msShine 6s ease-in-out 2s infinite;
+  padding: 0 .2em;
+}
+@keyframes msShine { 0%, 100% { background-position: 0% 0; } 50% { background-position: 100% 0; } }
+.ms-ornament { width: 150px; margin: 14px auto 16px; display: block; opacity: 0.9; }
+.ms-soft { font-size: 16px; color: #7a6656; margin: 0 0 8px; line-height: 1.6; font-style: italic; }
+.ms-lead { font-family: "MsCanela", "MsSerif", serif; font-size: clamp(19px, 4.6vw, 24px); line-height: 1.5; margin: 10px 0; color: var(--ink); max-width: 30ch; }
+.ms-lead b { color: var(--wine); font-weight: 400; }
+.ms-heart { color: var(--wine); }
+
+/* Boutons */
+.ms-btn {
+  position: relative; overflow: hidden;
+  margin-top: 26px; padding: 15px 34px; border-radius: 999px;
+  border: 0; color: #fff8ec;
+  background: linear-gradient(135deg, #a3343f, var(--wine) 50%, var(--wine-d));
+  font-family: "Cinzel", Georgia, serif; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase;
+  box-shadow: 0 0 0 1px rgba(233, 207, 143, 0.6) inset, 0 14px 30px -12px rgba(94, 21, 32, 0.6);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.ms-btn::after {
+  content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 240, 210, 0.45), transparent);
+  transform: skewX(-20deg); animation: msSweep 3.4s ease-in-out infinite;
+}
+@keyframes msSweep { 0%, 55% { left: -60%; } 100% { left: 130%; } }
+.ms-btn:hover { transform: translateY(-2px); }
+.ms-btn:active { transform: scale(.97); }
+.ms-btn.ghost { background: rgba(255, 250, 240, 0.75); color: var(--wine); box-shadow: 0 0 0 1px rgba(143, 42, 53, 0.45) inset; margin-top: 10px; }
+.ms-btn.ghost::after { display: none; }
+.ms-btn.gold { background: linear-gradient(135deg, #f3dc9e, #c9a456 50%, #9c7629); color: #3b2108; box-shadow: 0 0 0 1px rgba(255, 245, 215, 0.7) inset, 0 0 40px rgba(233, 207, 143, 0.45); }
+.ms-link { background: none; border: 0; color: #8a6a2a; font-family: "Cinzel", serif; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; padding: 10px 6px; }
+.ms-link.light { color: rgba(240, 222, 180, 0.85); }
+
+/* ── Questions ── */
+.ms-seal-top { width: 96px; margin-bottom: 14px; filter: drop-shadow(0 12px 14px rgba(74, 12, 23, 0.35)); animation: msBeat 2.6s ease-in-out infinite; }
+@keyframes msBeat { 0%, 100% { transform: scale(1); } 14% { transform: scale(1.06); } 28% { transform: scale(1); } 42% { transform: scale(1.04); } }
+.ms-steps { display: flex; gap: 10px; margin: 18px 0 14px; }
+.ms-steps i { width: 34px; height: 3px; border-radius: 3px; background: rgba(180, 140, 61, 0.25); transition: background .5s; }
+.ms-steps i.done { background: var(--gold); }
+.ms-steps i.now { background: linear-gradient(90deg, var(--gold), var(--gold-l)); box-shadow: 0 0 10px rgba(201, 164, 86, .7); }
+
+.ms-qcard {
+  width: 100%; max-width: 440px; padding: 28px 22px 18px;
+  background: linear-gradient(180deg, #fffaf1, #fbf1df);
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px rgba(180, 140, 61, .55), 0 0 0 6px #fffaf1, 0 0 0 7px rgba(180, 140, 61, .25), 0 30px 50px -28px rgba(60, 38, 14, .55);
+  animation: msScreenIn .9s ease both;
+}
+.ms-qcard[data-shake="1"] { animation: msShake .55s ease both; }
+@keyframes msShake { 0%, 100% { transform: none; } 20% { transform: translateX(-9px) rotate(-1deg); } 40% { transform: translateX(8px) rotate(1deg); } 60% { transform: translateX(-5px); } 80% { transform: translateX(3px); } }
+.ms-qnum { font-family: "Cinzel", serif; font-size: 11px; letter-spacing: .3em; color: #a1864e; margin: 0 0 8px; text-transform: uppercase; }
+.ms-q { font-family: "MsCanela", "MsSerif", serif; font-weight: 300; font-size: clamp(22px, 5.6vw, 28px); color: var(--wine); margin: 0 0 20px; line-height: 1.25; }
+.ms-choices { display: flex; flex-direction: column; gap: 10px; }
+.ms-choice {
+  padding: 14px 16px; border-radius: 999px;
+  border: 1px solid rgba(180, 140, 61, .55); background: rgba(255, 255, 255, .6);
+  color: var(--ink); font-family: "MsSerif", serif; font-size: 17px;
+  transition: all .3s ease;
+}
+.ms-choice:hover { background: #fff; border-color: var(--wine); color: var(--wine); transform: translateY(-1px); }
+.ms-choice:active { transform: scale(.98); }
+.ms-wrong { min-height: 26px; margin: 12px 0 0; font-size: 15px; font-style: italic; color: var(--wine); opacity: 0; transition: opacity .4s; }
+.ms-wrong.show { opacity: 1; }
+
+/* ── Sceau qui s'ouvre ── */
+.ms-unlock-seal { position: relative; width: 170px; height: 170px; display: flex; align-items: center; justify-content: center; }
+.ms-unlock-seal img { width: 140px; position: relative; z-index: 2; animation: msSealOpen 3.2s cubic-bezier(.6, 0, .3, 1) forwards; filter: drop-shadow(0 14px 16px rgba(74, 12, 23, .4)); }
+@keyframes msSealOpen {
+  0% { transform: scale(.6) rotate(-10deg); opacity: 0; }
+  25% { transform: scale(1.05) rotate(0); opacity: 1; }
+  45% { transform: scale(1); }
+  70% { transform: scale(1.15); filter: drop-shadow(0 0 40px rgba(233, 207, 143, 1)) brightness(1.2); }
+  100% { transform: scale(2.6); opacity: 0; filter: drop-shadow(0 0 80px rgba(233, 207, 143, 1)) brightness(1.6); }
+}
+.ms-unlock-ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(180, 140, 61, .7); animation: msRing 1.8s ease-out .8s infinite; opacity: 0; }
+.ms-unlock-ring.r2 { animation-delay: 1.4s; }
+@keyframes msRing { from { transform: scale(.7); opacity: .9; } to { transform: scale(2.2); opacity: 0; } }
+.ms-unlock-text { font-family: "MsScript", cursive; font-size: 40px; color: var(--wine); margin-top: 30px; animation: msIn 1.2s ease .6s both; }
+
+/* ── Mots doux ── */
+.ms-msg { justify-content: flex-start; padding-top: 70px; }
+.ms-progress { display: flex; gap: 8px; margin-bottom: 26px; }
+.ms-progress i { width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--gold); transition: all .5s; }
+.ms-progress i.on { background: var(--gold); box-shadow: 0 0 8px rgba(201, 164, 86, .8); }
+
+.ms-letter {
+  position: relative; width: 100%;
+  padding: 54px 26px 30px;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 33px, rgba(180, 140, 61, .09) 33px 34px),
+    linear-gradient(180deg, #fffbf3, #fbf0dc);
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(180, 140, 61, .55), 0 0 0 7px #fffaf1, 0 0 0 8px rgba(180, 140, 61, .28), 0 40px 60px -30px rgba(60, 38, 14, .6);
+  text-align: left;
+  animation: msLetter 1.4s cubic-bezier(.2, .8, .2, 1) both;
+  transform-origin: 50% 0;
+}
+@keyframes msLetter { from { opacity: 0; transform: perspective(900px) rotateX(-18deg) translateY(30px); } to { opacity: 1; transform: none; } }
+.ms-letter-seal { position: absolute; top: -34px; left: 50%; width: 68px; margin-left: -34px; filter: drop-shadow(0 8px 10px rgba(74, 12, 23, .35)); animation: msBeat 3s ease-in-out infinite; }
+.ms-letter-rose { position: absolute; right: -18px; bottom: -26px; width: 110px; opacity: .9; pointer-events: none; transform: rotate(-8deg); }
+.ms-letter-hello { font-family: "MsScript", cursive; font-size: 34px; color: var(--wine); margin: 0 0 12px; text-align: left; }
+.ms-letter-body { font-family: "MsCanela", "MsSerif", Georgia, serif; font-size: clamp(16.5px, 4.2vw, 19px); line-height: 1.72; color: #3f3127; }
+.ms-p { margin: 0 0 16px; opacity: 0; animation: msIn 1.3s ease forwards; }
+.ms-letter.rtl .ms-letter-body { font-family: "MsAr", "Amiri", "Traditional Arabic", serif; font-size: clamp(19px, 5vw, 23px); line-height: 2.05; text-align: right; }
+.ms-letter-sign { font-family: "MsScript", cursive; font-size: 30px; color: var(--gold); text-align: right; margin: 8px 30px 0 0; letter-spacing: .2em; }
+
+.ms-guess { margin-top: 34px; min-height: 96px; }
+.ms-guess-q { font-family: "MsScript", cursive; font-size: 36px; color: var(--wine); margin: 0; line-height: 1.1; }
+.ms-guess-a { font-family: "MsCanela", serif; font-size: 20px; font-style: italic; color: var(--wine); margin: 0; animation: msIn 1s ease both; }
+.ms-nav { width: 100%; display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+.ms-nav .ms-btn { margin-top: 0; }
+
+/* ── Nuit / transition ── */
+.ms-night-soft { font-family: "MsCanela", "MsSerif", serif; font-style: italic; font-size: clamp(18px, 4.6vw, 23px); color: rgba(240, 225, 195, .85); margin: 10px 0; max-width: 28ch; line-height: 1.55; }
+.ms-night-lead { font-family: "MsScript", cursive; font-size: clamp(48px, 12vw, 76px); color: #f3dfb0; margin: 6px 0; text-shadow: 0 0 30px rgba(233, 207, 143, .35); }
+.ms-clock { position: relative; margin-top: 40px; background: none; border: 0; padding: 20px 30px; display: flex; flex-direction: column; align-items: center; }
+.ms-clock-glow { position: absolute; inset: -40px; border-radius: 50%; background: radial-gradient(closest-side, rgba(233, 207, 143, .35), transparent); animation: msGlow 2.6s ease-in-out infinite; }
+@keyframes msGlow { 0%, 100% { transform: scale(.9); opacity: .6; } 50% { transform: scale(1.1); opacity: 1; } }
+.ms-clock-num {
+  position: relative; font-family: "Cinzel", serif; font-size: clamp(70px, 20vw, 120px); letter-spacing: .08em; line-height: 1;
+  background: linear-gradient(105deg, #b48c3d 0%, #e9cf8f 40%, #fff3cf 50%, #d8b768 60%, #a67d2b 100%);
+  background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 18px rgba(233, 207, 143, .5));
+  animation: msShine 4s ease-in-out infinite;
+}
+.ms-clock-hint { position: relative; margin-top: 14px; font-family: "Cinzel", serif; font-size: 11px; letter-spacing: .35em; text-transform: uppercase; color: rgba(240, 222, 180, .75); animation: msBlink 2.4s ease-in-out infinite; }
+@keyframes msBlink { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+
+/* ── Lettre de Youssef (générique) ── */
+.ms-finale { cursor: pointer; user-select: none; max-width: 860px; padding-bottom: 110px; }
+.ms-film { min-height: 50vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.ms-film-line {
+  font-family: "MsCanela", "MsSerif", serif; font-weight: 300;
+  font-size: clamp(22px, 5.4vw, 38px); line-height: 1.5;
+  color: #f7ead0; margin: 0; max-width: 24em;
+  text-shadow: 0 0 24px rgba(233, 207, 143, .25);
+  animation: msLine 1.8s cubic-bezier(.2, .7, .2, 1) both;
+}
+.ms-film-line.short { font-family: "MsScript", cursive; font-size: clamp(50px, 13vw, 92px); line-height: 1.15; color: #f3dfb0; }
+@keyframes msLine { from { opacity: 0; filter: blur(14px); letter-spacing: .06em; transform: translateY(14px) scale(.98); } to { opacity: 1; filter: none; letter-spacing: 0; transform: none; } }
+.ms-film-num {
+  font-family: "Cinzel", serif; font-size: clamp(64px, 18vw, 120px); margin: 0; letter-spacing: .1em; line-height: 1;
+  background: linear-gradient(105deg, #b48c3d, #fff3cf 50%, #a67d2b); -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: msLine 2.2s ease both;
+}
+.ms-film-title { font-family: "MsScript", cursive; font-size: clamp(44px, 11vw, 76px); color: #f3dfb0; margin: 8px 0 0; animation: msLine 2.2s ease .6s both; }
+.ms-film-emoji { font-size: 34px; margin: 12px 0 0; animation: msLine 2s ease 1.2s both; }
+.ms-film-ctrl { position: fixed; left: 50%; bottom: calc(30px + env(safe-area-inset-bottom)); transform: translateX(-50%); display: flex; align-items: center; gap: 6px; z-index: 5; width: min(420px, calc(100% - 32px)); }
+.ms-film-ctrl .ms-link { font-size: 18px; letter-spacing: 0; padding: 8px 12px; }
+.ms-film-bar { flex: 1; height: 2px; background: rgba(240, 222, 180, .2); border-radius: 2px; overflow: hidden; }
+.ms-film-bar i { display: block; height: 100%; background: linear-gradient(90deg, #b48c3d, #f3dfb0); transition: width 1s ease; }
+.ms-film-tap { position: fixed; bottom: calc(8px + env(safe-area-inset-bottom)); left: 0; right: 0; font-family: "Cinzel", serif; font-size: 9.5px; letter-spacing: .3em; text-transform: uppercase; color: rgba(240, 222, 180, .4); margin: 0; z-index: 5; }
+
+/* ── Fin ── */
+.ms-end { padding-top: 60px; }
+.ms-arch {
+  width: min(240px, 60vw); aspect-ratio: 3 / 4.4; border-radius: 200px 200px 12px 12px; overflow: hidden;
+  box-shadow: 0 0 0 4px rgba(20, 14, 30, .9), 0 0 0 5px rgba(233, 207, 143, .85), 0 0 0 12px rgba(20, 14, 30, .6), 0 0 0 13px rgba(233, 207, 143, .35), 0 0 70px rgba(233, 207, 143, .3);
+}
+.ms-arch video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ms-end-love { font-family: "MsScript", cursive; font-size: clamp(64px, 17vw, 110px); color: #f3dfb0; margin: 26px 0 0; line-height: 1; text-shadow: 0 0 40px rgba(233, 207, 143, .45); }
+.ms-end-sign {
+  font-family: "MsBeau", cursive; font-size: clamp(56px, 15vw, 96px); margin: 4px 0 6px; line-height: 1.2; padding: 0 .3em;
+  background: linear-gradient(105deg, #b48c3d, #e9cf8f 40%, #fff3cf 50%, #d8b768 60%, #a67d2b);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.ms-full { margin-top: 30px; width: 100%; max-width: 560px; color: #f1e3c4; }
+.ms-full summary { list-style: none; cursor: pointer; font-family: "Cinzel", serif; font-size: 12px; letter-spacing: .25em; text-transform: uppercase; color: rgba(240, 222, 180, .85); padding: 12px; border-top: 1px solid rgba(233, 207, 143, .25); border-bottom: 1px solid rgba(233, 207, 143, .25); }
+.ms-full summary::-webkit-details-marker { display: none; }
+.ms-full-body { text-align: left; padding: 22px 6px 6px; font-family: "MsCanela", "MsSerif", serif; font-size: 17px; line-height: 1.75; }
+.ms-full-body p { margin: 0 0 14px; }
+.ms-full-title { font-family: "MsScript", cursive; font-size: 34px !important; color: #f3dfb0; text-align: center; line-height: 1.2; }
+.ms-full-sign { font-family: "MsBeau", cursive; font-size: 44px; color: #e9cf8f; text-align: right; }
+
+/* Explosion de cœurs */
+.ms-burst { position: fixed; z-index: 50; pointer-events: none; width: 0; height: 0; }
+.ms-burst i {
+  position: absolute; left: 0; top: 0; font-style: normal; font-size: 18px; line-height: 1;
+  color: #d9b45e; text-shadow: 0 0 8px rgba(233, 207, 143, .9);
+  animation: msBurst 2.3s cubic-bezier(.15, .7, .3, 1) forwards;
+}
+.ms-burst i:nth-child(3n) { color: #c0485a; }
+@keyframes msBurst {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  60% { opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y) + 80px)) rotate(var(--r)) scale(var(--s)); opacity: 0; }
+}
+
+@media (min-width: 768px) {
+  .ms-letter { padding: 64px 56px 40px; }
+  .ms-letter-body { font-size: 19px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-root *, .ms-root *::before, .ms-root *::after { animation-duration: .01s !important; animation-delay: 0s !important; }
+}
+
+/* ───────── v2 : accueil, enveloppes, jeu, vœu, mobile ───────── */
+
+/* Accueil : le prénom s'écrit à l'encre d'or */
+.ms-start { cursor: pointer; user-select: none; }
+.ms-name { margin: 0; line-height: 1; }
+.ms-name span {
+  display: inline-block; padding: 0 .25em;
+  font-family: "MsBeau", cursive; font-weight: 400; font-size: clamp(96px, 30vw, 170px); line-height: 1.25;
+  background: linear-gradient(105deg, #8a6a2a 0%, #b48c3d 25%, #e9cf8f 42%, #fff3cf 50%, #d8b768 58%, #a67d2b 76%, #8a6a2a 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 6px 12px rgba(166, 125, 43, .25));
+  clip-path: inset(0 100% 0 0);
+  animation: msWrite 2.4s cubic-bezier(.6, .1, .3, 1) .6s forwards, msShine 5s ease-in-out 3s infinite;
+}
+@keyframes msWrite { to { clip-path: inset(0 0 0 0); } }
+.ms-start-tap { display: flex; flex-direction: column; align-items: center; margin-top: 26px; }
+.ms-start-seal { position: relative; width: 104px; height: 104px; display: flex; align-items: center; justify-content: center; }
+.ms-start-seal img { width: 86px; position: relative; z-index: 1; filter: drop-shadow(0 10px 12px rgba(74, 12, 23, .35)); animation: msBeat 2.4s ease-in-out infinite; }
+.ms-start-seal .ms-unlock-ring { animation-delay: 0s; }
+.ms-start-seal .ms-unlock-ring.r2 { animation-delay: .9s; }
+.ms-start-label { margin-top: 16px; font-family: "Cinzel", serif; font-size: 12px; letter-spacing: .32em; text-transform: uppercase; color: var(--wine); animation: msBlink 2.4s ease-in-out infinite; }
+.ms-start-sound { margin-top: 10px; font-size: 14px; color: #8a7462; font-style: italic; }
+
+/* Flash doré quand le coffre s'ouvre */
+.ms-flash { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 45%, rgba(255, 245, 215, 1), rgba(255, 236, 190, .6) 40%, transparent 75%); opacity: 0; animation: msFlash 3.3s ease forwards; }
+@keyframes msFlash { 0%, 55% { opacity: 0; } 78% { opacity: 1; } 100% { opacity: 0; } }
+
+/* Enveloppe */
+.ms-envscreen .ms-progress { margin-bottom: 18px; }
+.ms-progress i.now { background: var(--gold-l); box-shadow: 0 0 10px rgba(201, 164, 86, .9); animation: msBeat 1.6s ease-in-out infinite; }
+.ms-env-wrap { display: flex; flex-direction: column; align-items: center; }
+.ms-env {
+  position: relative; display: block; margin: 70px 0 10px;
+  width: min(330px, 84vw); aspect-ratio: 1.5; padding: 0; border: 0; background: none;
+  perspective: 1000px; animation: msFloat 4s ease-in-out infinite;
+}
+@keyframes msFloat { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-8px) rotate(1deg); } }
+.ms-env.open { animation: none; }
+.ms-env > span, .ms-env > img { position: absolute; display: block; }
+.ms-env-back { inset: 0; border-radius: 6px; background: linear-gradient(180deg, #e6d2ad, #dcc497); box-shadow: 0 30px 50px -24px rgba(60, 38, 14, .6), 0 0 0 1px rgba(180, 140, 61, .4); }
+.ms-env-paper {
+  left: 7%; right: 7%; top: 6%; height: 88%; border-radius: 3px; z-index: 1;
+  background: repeating-linear-gradient(180deg, transparent 0 15px, rgba(180, 140, 61, .12) 15px 16px), #fffbf3;
+  box-shadow: 0 0 0 1px rgba(180, 140, 61, .3);
+  transition: transform 1s cubic-bezier(.3, .7, .2, 1) .55s;
+}
+.ms-env-paper-txt { display: block; padding-top: 14%; font-family: "MsScript", cursive; font-size: clamp(26px, 8vw, 34px); color: var(--wine); }
+.ms-env-front {
+  inset: 0; z-index: 2; border-radius: 6px;
+  background: linear-gradient(170deg, #f5e8cf, #ead7b3);
+  clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%);
+  box-shadow: inset 0 -1px 0 rgba(180, 140, 61, .3);
+}
+.ms-env-front::after { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(180, 140, 61, .35); border-radius: 3px; clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%); }
+.ms-env-flap {
+  left: 0; right: 0; top: 0; height: 60%; z-index: 3;
+  background: linear-gradient(180deg, #efdfc0, #e2cb9f);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: 50% 0;
+  transition: transform .8s cubic-bezier(.5, 0, .3, 1), z-index 0s linear .4s;
+  filter: drop-shadow(0 3px 3px rgba(60, 38, 14, .25));
+}
+.ms-env.open .ms-env-flap { transform: rotateX(180deg); z-index: 0; }
+.ms-env.open .ms-env-paper { transform: translateY(-62%); }
+.ms-env-seal {
+  left: 50%; top: 60%; width: 74px; z-index: 4; transform: translate(-50%, -50%);
+  filter: drop-shadow(0 8px 10px rgba(74, 12, 23, .4));
+  transition: transform .5s ease, opacity .5s ease;
+  animation: msSealPulse 2.2s ease-in-out infinite;
+}
+@keyframes msSealPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.08); filter: drop-shadow(0 0 18px rgba(233, 207, 143, .9)); } }
+.ms-env.open .ms-env-seal { animation: none; transform: translate(-50%, -50%) scale(1.6) rotate(20deg); opacity: 0; }
+.ms-env-hint { font-family: "Cinzel", serif; font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--wine); margin-top: 22px; animation: msBlink 2.4s ease-in-out infinite; transition: opacity .4s; }
+.ms-env-hint.hide { opacity: 0 !important; animation: none; }
+
+/* Jeu « devine qui » */
+.ms-count {
+  font-family: "Cinzel", serif; font-size: 96px; line-height: 1; margin: 0;
+  background: linear-gradient(105deg, #8a6a2a, #e9cf8f 45%, #fff3cf 50%, #a67d2b);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: msCount .9s cubic-bezier(.2, .9, .3, 1.3) both;
+}
+@keyframes msCount { from { transform: scale(2.2); opacity: 0; filter: blur(8px); } 40% { opacity: 1; filter: none; } to { transform: scale(1); opacity: .9; } }
+.ms-guess-a { line-height: 1.5; }
+
+/* Barre de navigation collée en bas sur téléphone */
+.ms-nav {
+  position: sticky; bottom: 0; z-index: 6;
+  margin: 10px -18px calc(-40px - env(safe-area-inset-bottom)); width: calc(100% + 36px);
+  padding: 18px 18px calc(16px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(251, 243, 228, 0), rgba(251, 243, 228, .92) 35%, #f6ead4);
+}
+.ms-nav .ms-btn { white-space: nowrap; padding: 15px 28px; }
+.ms-nav .ms-link { white-space: nowrap; }
+
+/* Lettre de Youssef : mots un par un */
+.ms-film-line { animation: none; }
+.ms-w { display: inline-block; white-space: pre-wrap; opacity: 0; animation: msWord 1.1s cubic-bezier(.2, .7, .2, 1) forwards; }
+@keyframes msWord { from { opacity: 0; filter: blur(10px); transform: translateY(10px); } to { opacity: 1; filter: none; transform: none; } }
+.ms-ctl { background: none; border: 0; color: rgba(240, 222, 180, .85); font-size: 22px; line-height: 1; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+.ms-ctl:active { background: rgba(240, 222, 180, .12); }
+
+/* Le vœu : les étoiles dessinent un cœur */
+.ms-end { transition: opacity 1.4s ease, filter 1.4s ease; }
+.is-wishing .ms-end { opacity: 0; filter: blur(6px); pointer-events: none; }
+.is-wishing .ms-music { opacity: .4; }
+.ms-wish { position: fixed; inset: 0; z-index: 8; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; padding-bottom: 8vh; text-align: center; }
+.ms-wish-names { font-family: "MsScript", cursive; font-size: clamp(40px, 11vw, 70px); color: #f6e3b4; margin: 0; text-shadow: 0 0 30px rgba(233, 207, 143, .6); opacity: 0; animation: msIn 2s ease 2.6s forwards; }
+.ms-wish-names span { color: #e3707f; }
+.ms-wish-text { font-family: "MsCanela", serif; font-style: italic; font-size: clamp(16px, 4.2vw, 20px); color: rgba(240, 225, 195, .85); margin: 8px 0 0; opacity: 0; animation: msIn 2s ease 4s forwards; }
+
+/* Petits téléphones */
+@media (max-width: 380px) {
+  .ms-letter { padding: 50px 18px 26px; }
+  .ms-letter-hello { font-size: 30px; }
+  .ms-qcard { padding: 24px 16px 14px; }
+  .ms-choice { font-size: 16px; padding: 13px 12px; }
+  .ms-nav .ms-btn { padding: 14px 22px; font-size: 12px; }
+  .ms-guess-q { font-size: 31px; }
+}
+@media (max-height: 700px) {
+  .ms-seal-top { width: 70px; margin-bottom: 6px; }
+  .ms-ornament { margin: 8px auto 10px; width: 120px; }
+  .ms-film { min-height: 40vh; }
+}
+
+.ms-film-girls { font-family: "Cinzel", serif; font-size: 11px; letter-spacing: .35em; text-transform: uppercase; color: #e3a3ac; margin: 0 0 18px; padding: 8px 16px; border: 1px solid rgba(227, 163, 172, .4); border-radius: 999px; animation: msIn 1.2s ease both; }
+.is-wishing .ms-end { opacity: 0 !important; filter: blur(6px) !important; pointer-events: none; }
+.ms-ctl { font-family: Georgia, "Times New Roman", serif; }
+.ms-film-title { font-size: clamp(40px, 9.5vw, 76px); }
+.ms-ctl { color: #f0deb4; font-size: 28px; }
+
+/* Réponse écrite */
+.ms-answer { display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
+.ms-input {
+  width: 100%; padding: 15px 18px; border-radius: 999px; text-align: center;
+  border: 1px solid rgba(180, 140, 61, .6); background: rgba(255, 255, 255, .75);
+  font-family: "MsCanela", "MsSerif", serif; font-size: 20px; color: var(--wine);
+  outline: none; transition: border-color .3s, box-shadow .3s; -webkit-appearance: none;
+}
+.ms-input::placeholder { color: rgba(122, 102, 86, .55); font-style: italic; font-size: 17px; }
+.ms-input:focus { border-color: var(--wine); box-shadow: 0 0 0 4px rgba(143, 42, 53, .1), 0 0 20px rgba(233, 207, 143, .5); }
+.ms-submit { margin-top: 0; }
+.ms-submit:disabled { opacity: .5; }
+.ms-q { font-family: "MsCanela", "MsSerif", serif; }
