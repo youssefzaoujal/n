@@ -102,9 +102,9 @@ export const youssefLines: string[] = [
   "Je t'aime d'un amour that even the most beautiful words in the world could never fully describe",
   "Attends, attends, mon amour… ❤️ Before I finish, j’ai un petit message pour tes amies qui sont avec toi aujourd’hui… Girls, j’ai juste une petite chose à vous dire… 🥹❤️",
   "Nouha is not just someone special to me, Nouha amana entre vos mains ❤️",
-  "Alors thalaw fiha svp, take good care of her, faites-la rire, entourez-la d’amour et surtout, make sure that beautiful smile never leaves her face.",
+  "Alors thalaw fiha svp, take good care of her, faites-la rire, entourez-la d’amour et surtout, make sure that beautiful smile never leaves her face",
   "Because you're not just celebrating her birthday today… you're celebrating someone who means the whole world to me ❤️",
-  "Happy Birthday, mon amour. You are my 11:11 wish that came true. 🥹❤️🎂",
+  "Happy Birthday, mon amour. You are my 11:11 wish that came true 🥹❤️🎂",
 ];
 
 /** Les 3 questions pour ouvrir le coffre : la réponse à écrire est toujours « Youssef » (majuscules ou minuscules). */
