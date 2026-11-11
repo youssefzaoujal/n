@@ -96,7 +96,6 @@ export const youssefLines: string[] = [
   "And I don't believe that's just a coincidence. Ptt que l'univers savait qu'une personne aussi belle que toi deserved to be born on a day dedicated to love itself",
   "They say 11:11 is the perfect time to make a wish… Mais comment pourrais-je demander qlq chose de plus, when the most beautiful wish of my life is already you? ❤️",
   "If someone asked me what I love the most about you, I wouldn't know where to begin. Ton sourire, tes yeux, ta douceur, ton cœur, ta façon de rendre les journées ordinaires extraordinaires… I love every little detail that makes you YOU",
-  "And if I could give you one gift today, ce serait de te permettre de te voir à travers mes yeux, just for a moment. Pour que tu comprennes enfin how precious, beautiful and irreplaceable you are to me",
   "Happy Birthday, my beautiful girl, mon amour, my pink diamond 🎂❤️",
   "Je prie pour que every dream you carry in your heart devienne réalité, que la vie te protège, qu'elle t'offre all the happiness you deserve, et que ton magnifique sourire never fades away",
   "Je t'aime d'un amour that even the most beautiful words in the world could never fully describe",
