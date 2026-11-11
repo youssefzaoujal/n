@@ -58,6 +58,30 @@ May life always surprise you with blessings, happiness and moments as beautiful 
 
 I've always seen how kind, how loving you are, how much you’ve got to offer, and how deserving you are of a love that makes you feel truly happy. I always hoped someone would come along and see how beautiful you are inside and out. And now, watching how happy you are, how your face lights up and your eyes sparkle since the day ✨Sidi Youssef✨ came into your life, it’s such a beautiful thing to witness. Nothing makes me happier than seeing you receive the happiness you've always deserved. May this be just the beginning of a lifetime of beautiful moments. You deserve every bit of it ❤️❤️❤️`,
   },
+  {
+    hint: "",
+    text: `Ma très chère et douce Nouhati ,
+
+Aujourd’hui est un grand jour , tu viens d’accéder à la deuxième moitié de tes vingtaines, ces vingtaines où on grandi, on apprend , on se trompe et on découvre de belles choses et d’autres un peu moins … On apprend à se connaître soit même et se faire face quand il le faut . Ce qui est sûr c’est que les meilleurs rencontres sont celles des vingtaines et les amies qu’on se fait à cet âge là sont celles qui témoignent de notre vraie évolution vers l’âge adulte . Durant ces années je t’ai vu fleurir , grandir, pétiller de bonheur et d’espoir mais aussi de bon sens et de sagesse .
+
+Merci d’illuminer nos vies par ta douceur et ta bienveillance , tu es notre rayon de soleil qui embaume nos journées 💕
+
+À nos 6 ans d’amitié , de rires et de larmes , à ces 25 printemps que tu embellis ce monde et finalement à tout une vie pleine de bonheur et d’amour 💕
+
+Je t’aime fort sadikatiiiiii ♥️`,
+  },
+  {
+    hint: "",
+    text: `Joyeux anniversaire Nouhitaass dyali ♥️♥️
+
+Lah ydakhal elik had 3am b saha o salama avec beaucoup de réussite et de succès dans tout ce que tu entreprends inxa2allah .
+
+7na kamlin mejmou3in lyouma bax nxofo dahka ela wejhek o lah ykhalik dima farahana o lah ysser lek f ayi hj katmnaha o lah ykhalik lilna o nbqaw daiman mejmou3in Inxa2allah
+
+O mabaqi walo ya haneteb3ek ana n almania awla tba3ni tn n la France .
+
+Je t’aime fort habibati, enjoy your day to the fullest! 🥹🫶🏻`,
+  },
 ];
 
 /** La lettre de Youssef, lue ligne par ligne à la fin. La première ligne sert de titre. */
@@ -98,5 +122,3 @@ export const questions = [
 /** Musique de fond, en boucle, du coffre jusqu'à la fin (Passacaglia, Handel/Halvorsen). */
 export const MUSIC = "/media/passacaglia.mp3";
 
-/** Lignes de la lettre adressées aux amies (affichées avec « Un mot pour les amies de Nouha »). */
-export const girlsLines = { from: 15, to: 18 };

@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ANSWER, friendMessages, questions, youssefLines, youssefTitle, girlsLines, MUSIC } from "./data";
+import { ANSWER, friendMessages, questions, youssefLines, MUSIC } from "./data";
 
 const IMG = "/sites/thesacredgarden/images";
 const SEAL = `${IMG}/seal-yn.png`;
@@ -325,7 +325,6 @@ export function MessagesExperience() {
   const [wrong, setWrong] = useState<string | null>(null);
   const [shakeKey, setShakeKey] = useState(0);
   const [muted, setMuted] = useState(false);
-  const [paused, setPaused] = useState(false);
   const a1 = useRef<HTMLAudioElement>(null);
   const a2 = useRef<HTMLAudioElement>(null);
   const active = useRef<1 | 2>(1);
@@ -464,16 +463,6 @@ export function MessagesExperience() {
 
   /* ── Lettre de Youssef : défile toute seule (toucher = ligne suivante). ── */
   const lineCount = youssefLines.length;
-  useEffect(() => {
-    if (stage.k !== "finale" || paused) return;
-    const txt = stage.line < 0 ? youssefTitle : youssefLines[stage.line];
-    const ms = stage.line < 0 ? 5200 : 4200 + txt.length * 50;
-    const id = setTimeout(() => {
-      if (stage.line + 1 < lineCount) setStage({ k: "finale", line: stage.line + 1 });
-      else setStage({ k: "end" });
-    }, ms);
-    return () => clearTimeout(id);
-  }, [stage, paused, lineCount]);
 
   const nextLine = () => {
     if (stage.k !== "finale") return;
@@ -737,9 +726,6 @@ export function MessagesExperience() {
               </>
             ) : (
               <>
-                {stage.line >= girlsLines.from + 1 && stage.line <= girlsLines.to && (
-                  <p className="ms-film-girls">Pour les amies de Nouha 👭</p>
-                )}
                 <p className={`ms-film-line ${youssefLines[stage.line].length < 40 ? "short" : ""}`}>
                   <Words text={youssefLines[stage.line]} />
                 </p>
@@ -753,14 +739,6 @@ export function MessagesExperience() {
             <div className="ms-film-bar">
               <i style={{ width: `${((stage.line + 1) / lineCount) * 100}%` }} />
             </div>
-            <button
-              type="button"
-              className="ms-ctl"
-              onClick={() => setPaused((p) => !p)}
-              aria-label={paused ? "Reprendre" : "Pause"}
-            >
-              {paused ? (<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M7 5l12 7-12 7z" fill="currentColor" /></svg>) : (<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>)}
-            </button>
             <button type="button" className="ms-ctl" onClick={nextLine} aria-label="Ligne suivante">
               <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </button>

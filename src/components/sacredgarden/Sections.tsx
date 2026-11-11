@@ -47,7 +47,9 @@ export function LetterSection() {
           <img className="sg-s-ornament" src={ORNAMENT} alt="" aria-hidden="true" />
         </div>
         <div {...reveal("fadeinup", 0.15, 1.6, "sg-paper")}>
-          <img className="sg-paper-rose" src={ROSE} alt="" aria-hidden="true" />
+          <a className="sg-paper-rose" href="/messages" aria-label="Les mots doux de Nouha">
+            <img src={ROSE} alt="" draggable={false} />
+          </a>
           <p className="sg-paper-hello">Chères amies,</p>
           <p className="sg-paper-lead">
             Il y a des personnes qu&apos;on ne se contente pas de fêter. <em>On les célèbre.</em>

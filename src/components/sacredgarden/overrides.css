@@ -1960,3 +1960,7 @@ html.lenis body {
 .sg-time-reveal .sg-time-date {
   margin-top: 10px;
 }
+
+/* La rose de la lettre mène vers /messages */
+a.sg-paper-rose { display: block; z-index: 5; cursor: pointer; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
+a.sg-paper-rose img { display: block; width: 100%; pointer-events: none; }
