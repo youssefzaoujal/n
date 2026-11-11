@@ -488,3 +488,8 @@
 /* Fin : « Je t'aime » sous le cœur */
 .ms-final { align-items: flex-start; }
 .ms-final-love { position: absolute; left: 0; right: 0; top: var(--love-top, 62vh); text-align: center; --ink: 0px; transform: none; }
+/* Questions : seule la question change, en douceur (plus de rechargement de la page) */
+.ms-qcard.is-shaking { animation: msShake .55s ease both; }
+.ms-qswap { animation: msQIn .6s cubic-bezier(.2, .7, .2, 1) both; transition: opacity .35s ease, transform .35s ease, filter .35s ease; }
+.ms-qswap.out { opacity: 0; transform: translateY(-8px); filter: blur(4px); }
+@keyframes msQIn { from { opacity: 0; transform: translateY(10px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }

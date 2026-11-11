@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ANSWER, friendMessages, questions, youssefLines, MUSIC } from "./data";
+import { ANSWER, friendMessages, questions, youssefLines, youssefTitle, MUSIC } from "./data";
 
 const IMG = "/sites/thesacredgarden/images";
 const SEAL = `${IMG}/seal-yn.png`;
@@ -320,7 +320,6 @@ export function MessagesExperience() {
   const [stage, setStage] = useState<Stage>({ k: "start" });
   const [opened, setOpened] = useState(false);
   const [wrong, setWrong] = useState<string | null>(null);
-  const [shakeKey, setShakeKey] = useState(0);
   const [muted, setMuted] = useState(false);
   const a1 = useRef<HTMLAudioElement>(null);
   const a2 = useRef<HTMLAudioElement>(null);
@@ -433,6 +432,8 @@ export function MessagesExperience() {
   };
 
   const [typed, setTyped] = useState("");
+  const [leaving, setLeaving] = useState(false);
+  const [shaking, setShaking] = useState(false);
   const answer = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (stage.k !== "gate") return;
@@ -443,18 +444,21 @@ export function MessagesExperience() {
       setWrong(null);
       setTyped("");
       vibrate(25);
+      setLeaving(true);
       setTimeout(() => {
+        setLeaving(false);
         if (stage.q + 1 < questions.length) setStage({ k: "gate", q: stage.q + 1 });
         else {
           setStage({ k: "unlock" });
           vibrate([40, 60, 40, 60, 160]);
           setTimeout(() => setStage({ k: "intro" }), 3300);
         }
-      }, 650);
+      }, 450);
     } else {
       setWrong(q.wrong);
       vibrate([80, 50, 80]);
-      setShakeKey((k) => k + 1);
+      setShaking(true);
+      setTimeout(() => setShaking(false), 560);
     }
   };
 
@@ -522,7 +526,7 @@ export function MessagesExperience() {
 
       {/* ───────── Les 3 questions ───────── */}
       {stage.k === "gate" && (
-        <section className="ms-screen ms-gate" key={`q${stage.q}`}>
+        <section className="ms-screen ms-gate" key="gate">
           <img className="ms-seal-top" src={SEAL} alt="" />
           <p className="ms-kicker">Les mots doux de Nouha</p>
           <h1 className="ms-script">Un coffre rempli d&apos;amour</h1>
@@ -535,11 +539,13 @@ export function MessagesExperience() {
             ))}
           </div>
 
-          <div className="ms-qcard" key={shakeKey} data-shake={shakeKey > 0 && wrong ? "1" : "0"}>
-            <p className="ms-qnum">
-              Question {stage.q + 1} / {questions.length}
-            </p>
-            <h2 className="ms-q">{questions[stage.q].q}</h2>
+          <div className={`ms-qcard ${shaking ? "is-shaking" : ""}`}>
+            <div className={`ms-qswap ${leaving ? "out" : ""}`} key={stage.q}>
+              <p className="ms-qnum">
+                Question {stage.q + 1} / {questions.length}
+              </p>
+              <h2 className="ms-q">{questions[stage.q].q}</h2>
+            </div>
             <form className="ms-answer" onSubmit={answer}>
               <input
                 className="ms-input"
@@ -717,7 +723,7 @@ export function MessagesExperience() {
                 <p className="ms-film-title">
                   Happy Birthday,
                   <br />
-                  My Pink Diamond
+                  {(youssefTitle.split("|")[1] ?? youssefTitle).replace(/^\s*Happy Birthday,?\s*/i, "").trim()}
                 </p>
                 <p className="ms-film-emoji">❤️🎂</p>
               </>
